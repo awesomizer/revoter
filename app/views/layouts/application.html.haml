@@ -1,16 +1,17 @@
 !!!
 %html
   %head
-    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-      %title= content_for?(:title) ? yield(:title) : "Votevote"
-      %meta{:content => content_for?(:description) ? yield(:description) : "Votevote", :name => "description"}
-        = stylesheet_link_tag "application", :media => "all"
-        = javascript_include_tag "application"
-        = csrf_meta_tags
-        = yield(:head)
+    %meta{:charset => 'utf-8'}
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0, maximum-scale=1.0"}
+    %title= content_for?(:title) ? yield(:title) : "VoteVote"
+    %meta{:content => content_for?(:description) ? yield(:description) : "VoteVote", :name => "description"}
+      = stylesheet_link_tag "application", :media => "all"
+      = javascript_include_tag "application"
+      = csrf_meta_tags
+      = yield(:head)
   %body{:class => "#{controller_name} #{action_name}"}
-    .navbar.navbar-fixed-top
-      %nav.navbar-inner
+    %nav.navbar.navbar-fixed-top
+      .navbar-inner
         .container
           = render 'layouts/navigation'
     #main{:role => "main"}
@@ -23,3 +24,8 @@
           %footer
       / ! end of .container
     / ! end of #main
+    %script
+      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g,s)}(document,'script'));  
