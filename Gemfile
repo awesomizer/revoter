@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gem 'rails',          '3.2.13'
 gem "pg",             ">= 0.15.0"
 gem "haml-rails",     ">= 0.4"
-gem "bootstrap-sass", ">= 2.3.0.0"
 gem "devise",         ">= 2.2.3"
 gem "cancan",         ">= 1.6.9"
 gem "rolify",         ">= 3.2.0"
@@ -12,9 +11,11 @@ gem "figaro",         ">= 0.6.3"
 gem 'jquery-rails'
 
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier',     '>= 1.0.3'
+  gem 'coffee-rails',   '~> 3.2.1'
+  gem 'uglifier',       '>= 1.0.3'
+  gem 'sass-rails',     '~> 3.2.3'
+  gem 'bootstrap-sass', '~> 2.3.1.0'
+  gem 'country_select', '>= 1.1.3'
 end
 
 group :development do
