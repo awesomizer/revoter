@@ -9,6 +9,7 @@ gem "rolify",         ">= 3.2.0"
 gem "simple_form",    ">= 2.1.0"
 gem "figaro",         ">= 0.6.3"
 gem 'jquery-rails'
+gem 'httparty',       ">= 0.10.1"
 
 group :assets do
   gem 'coffee-rails',   '~> 3.2.1'
