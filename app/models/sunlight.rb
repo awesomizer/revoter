@@ -1,6 +1,9 @@
-class Sunlight
+class CongressApi
   include HTTParty
   base_uri 'http://congress.api.sunlightfoundation.com'
+
+  def initialize
+  end
 
   def bill type, number, congress
     id = type + number + '-' + congress
