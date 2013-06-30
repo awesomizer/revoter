@@ -12,5 +12,6 @@ Feature: Display historical data about US congressional legislation
 		Then A 'bill not found' error message should be displayed on the screen
 
 	Scenario: get vote informaion for a particular vote
-
-	Scenario: get legislator information for a particular legislator
+		Given Information for a bill is displayed
+		When I click a vote for the bill
+		Then The vote information should be displayed on the screen
