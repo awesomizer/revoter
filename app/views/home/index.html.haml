@@ -1,5 +1,20 @@
-%h3 Real Democarcy in the Senate
-  %p
-    The US Senate is radically undemocratic. Because each states gets the same number of Senators, people in larger states can have much less power in the federal government then those from smaller states.  This compromise might have made sense at our nation's founding, when the largest state had X times the population of the smallest state.  Today that spread is about 70-1.
-  %p
-    To see how votes in the Senate would change if we had representation based on population, fill in the information below to find a bill you're interested in.  From there, select a vote and see how more equal representation would change what gets voted into law.    
+%h3 
+  Real Democarcy in the Senate
+%p 
+  The US Senate is radically undemocratic. Because each states gets the same number of Senators, people in larger states can have much less power in the federal government then those from smaller states. This compromise might have made sense at our nation's founding, when the largest state had X times the population of the smallest state. Today that spread is about 70-1.
+%p 
+  To see how votes in the Senate would change if we had representation based on population, fill in the information below to find a bill you're interested in. From there, select a vote and see how more equal representation would change what gets voted into law.
+
+%h3 
+  Find a Bill
+
+= form_tag ({controller: :congress_api, action: :bill}) do
+  = radio_button_tag :bill_type, :sb
+  = label_tag "Senate Bill"
+  = radio_button_tag :bill_type, :sr
+  = label_tag "Senate Resolution"
+  = label_tag "Bill Number"
+  = text_field_tag :bill_number
+  = hidden_field_tag :chamber, :senate
+  <br />
+  = submit_tag "Find Bill"
