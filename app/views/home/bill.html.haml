@@ -1,0 +1,8 @@
+%h3
+  "#{@bill.short_title} (#{@bill.nickname})"
+
+%ul
+  = @bill.votes.each |vote| do
+    = link_to vote.type, votes_path, method: :get, remote: true
+    = vote.question
+    = vote.result
