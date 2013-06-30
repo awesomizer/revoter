@@ -13,7 +13,7 @@ class CongressApi
   end
 
   def votes roll_id
-    options = {query: {apikey: ENV["SUNLIGHT_KEY"], roll_id: roll_id}}
+    options = {query: {apikey: ENV["SUNLIGHT_KEY"], roll_id: roll_id, fields: 'voter_ids,voters,required,result'}}
       self.class.get('/votes', options)
   end
 
