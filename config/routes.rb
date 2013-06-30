@@ -11,5 +11,6 @@ Votevote::Application.routes.draw do
   resources :users
   
   # congress_api matchers
-  get '/congress_api/bill', to: 'congress_api#bill', as: :bill
+  get '/congress_api/bill', to: 'congress_api#find_bill', as: :bill
+  get '/congress_api/votes', to: 'congress_api#votes', as: :votes
 end
