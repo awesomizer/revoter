@@ -6,7 +6,7 @@ class CongressApi
   def initialize
   end
 
-  def bill type, number, congress
+  def find_bill type, number, congress
     bill_id = type + number + '-' + congress
     options = {query: {apikey: ENV["SUNLIGHT_KEY"], bill_id: bill_id, fields: 'last_vote_at,titles,nicknames,summary_short,urls,votes,history,last_action'}}
       self.class.get('/bills', options)
