@@ -8,12 +8,12 @@ class CongressApi
 
   def bill type, number, congress
     bill_id = type + number + '-' + congress
-    options = {query: {apikey: ENV["SUNLIGHT_KEY"], bill_id: bill_id, fields: 'votes,history'}}
+    options = {query: {apikey: ENV["SUNLIGHT_KEY"], bill_id: bill_id, fields: 'last_vote_at,titles,nicknames,summary_short,urls,votes,history,last_action'}}
       self.class.get('/bills', options)
   end
 
   def votes roll_id
-    options = {query: {apikey: ENV["SUNLIGHT_KEY"], roll_id: roll_id, fields: 'voter_ids,voters,required,result'}}
+    options = {query: {apikey: ENV["SUNLIGHT_KEY"], roll_id: roll_id, fields: 'vote_type,question,required,voter_ids,voters,result'}}
       self.class.get('/votes', options)
   end
 
