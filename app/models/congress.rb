@@ -17,7 +17,10 @@ class CongressApi
       self.class.get('/votes', options)
   end
 
-  def legislators
+  def legislators bioguide_id
+    options = {query: {apikey: ENV["SUNLIGHT_KEY"], bioguide_id: bioguide_id, fields: 'state,title,chamber,state_rank,term_start,term_end,first_name,nickname,last_name'}}
+      self.class.get('/legislators', options)
+
   end
 
 end
