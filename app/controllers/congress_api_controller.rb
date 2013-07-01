@@ -1,7 +1,9 @@
 class CongressApiController < ApplicationController
 
   def bill
-    @bill = CongressApi.find_bill(params[:bill_type], params[:bill_number], params[:chamber])
+    api = CongressApi.new
+    @bill = api.find_bill(params[:bill_type], params[:bill_number], params[:congress])
+    @bill = @bill["results"][0]
   end
   
   def votes
