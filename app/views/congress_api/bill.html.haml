@@ -1,9 +1,9 @@
-%h3
-  "#{@bill.short_title} (#{@bill.nickname})"
+%h4
+  "#{@bill.official_title}"
 
 %ul
-  = @bill.votes.each |vote| do
+  - @bill.vote_list.each do |vote|
     %li
-    = link_to vote.type, votes_path, method: :get, remote: true
-    = vote.question
-    = vote.result
+      = link_to vote["text"], votes_path, method: :get, remote: true
+
+
