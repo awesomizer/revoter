@@ -1,9 +1,14 @@
 %h4
   "#{@bill.official_title}"
 
+%h5
+  Votes
 %ul
-  - @bill.vote_list.each do |vote|
+  - @votes.each do |vote|
     %li
-      = link_to vote["text"], votes_path, method: :get, remote: true
+      = link_to "#{vote['question']} (#{vote['result']}, #{vote['breakdown']['total']['Yea']} - #{vote['breakdown']['total']['Nay']})", votes_path, method: :get, remote: true
+
+%p
+  = p @votes.inspect
 
 
