@@ -31,6 +31,9 @@ class CongressApi
       self.class.get('/legislators', options).parsed_response
   end
 
+  def roll_call
+    # list of voters with vote and individual info
+  end
 end
 
 
