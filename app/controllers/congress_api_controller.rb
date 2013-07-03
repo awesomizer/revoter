@@ -12,7 +12,11 @@ class CongressApiController < ApplicationController
                      last_action: bill_results["last_action"], 
                      vote_list: bill_results["votes"],
                      urls: bill_results["urls"])
-    @bill.vote_list.each do |v|
+      @votes = votes(@bill.vote_list)
+  end
+  
+  def votes vote_list
+    vote_list.each do |v|
       @votes = []
       vote_results = api.get_vote(v["roll_id"])
       vote_results = vote_results["results"][0]
@@ -25,9 +29,6 @@ class CongressApiController < ApplicationController
                            voter_ids: vote_results["voter_ids"], 
                            bill_id: @bill.id)
     end
-  end
-  
-  def votes
   end
 
 end
