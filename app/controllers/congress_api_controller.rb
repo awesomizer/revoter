@@ -6,13 +6,13 @@ class CongressApiController < ApplicationController
     results = api.get_bill(params[:bill_type], params[:bill_number], params[:congress])
     results = results["results"][0]
     @bill = Bill.find_or_create_by(sun_bill_id: results["bill_id"]) do |b|
-                        b.official_title = results["official_title"], 
-                        b.nicknames = results["nickname"], 
-                        b.summary_short = results["summary_short"], 
-                        b.last_vote_at = results["last_vote_at"], 
-                        b.last_action = results["last_action"], 
-                        b.vote_list = results["votes"],
-                        b.urls = results["urls"])
+                        b.official_title = results["official_title"] 
+                        b.nicknames = results["nickname"] 
+                        b.summary_short = results["summary_short"] 
+                        b.last_vote_at = results["last_vote_at"] 
+                        b.last_action = results["last_action"] 
+                        b.vote_list = results["votes"]
+                        b.urls = results["urls"]
     end
       @votes = votes(@bill.vote_list)
   end
@@ -27,13 +27,13 @@ class CongressApiController < ApplicationController
       results = api.get_vote(v["roll_id"])
       results = results["results"][0]
       @votes << Vote.find_or_create_by(roll_id: results["roll_id"]) do |v|
-                          v.question = results["question"], 
-                          v.required = results["required"], 
-                          v.result = results["result"], 
-                          v.vote_type = results["vote_type"],
-                          v.breakdown = results["breakdown"],
-                          v.roll_call = roll_call(vote_results["voter_ids"]), 
-                          v.bill_id = @bill.id)
+                          v.question = results["question"] 
+                          v.required = results["required"] 
+                          v.result = results["result"] 
+                          v.vote_type = results["vote_type"]
+                          v.breakdown = results["breakdown"]
+                          v.roll_call = roll_call(vote_results["voter_ids"]) 
+                          v.bill_id = @bill.id
       end
     end
   end
