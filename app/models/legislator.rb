@@ -11,4 +11,6 @@ class Legislator < ActiveRecord::Base
     :nickname,
     :last_name
 
+  has_and_belongs_to_many :votes
+
 end
