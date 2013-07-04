@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130703235724) do
+ActiveRecord::Schema.define(:version => 20130704003434) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -201,6 +201,21 @@ ActiveRecord::Schema.define(:version => 20130703235724) do
 
 # Could not dump table "items" because of following StandardError
 #   Unknown type 'hstore' for column 'options'
+
+  create_table "legislators", :force => true do |t|
+    t.string   "bioguide_id"
+    t.string   "state"
+    t.string   "title"
+    t.string   "chamber"
+    t.string   "state_rank"
+    t.datetime "term_start"
+    t.datetime "term_end"
+    t.string   "first_name"
+    t.string   "nickname"
+    t.string   "last_name"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "needs", :force => true do |t|
     t.string   "title"
