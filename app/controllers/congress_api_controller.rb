@@ -4,7 +4,7 @@ class CongressApiController < ApplicationController
   def bill
     api = CongressApi.new
     results = api.get_bill(params[:bill_type], params[:bill_number], params[:congress])
-    results = bill_results["results"][0]
+    results = results["results"][0]
     @bill = Bill.find_or_create_by(sun_bill_id: results["bill_id"]) do |b|
                         b.official_title: results["official_title"], 
                         b.nicknames: results["nickname"], 
@@ -25,7 +25,7 @@ class CongressApiController < ApplicationController
     vote_list.each do |v|
       @votes = []
       results = api.get_vote(v["roll_id"])
-      results = vote_results["results"][0]
+      results = results["results"][0]
       @votes << Vote.find_or_create_by(roll_id: results["roll_id"]) do |v|
                           v.question: results["question"], 
                           v.required: results["required"], 
