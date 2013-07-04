@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130702044735) do
+ActiveRecord::Schema.define(:version => 20130703235724) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -156,6 +156,7 @@ ActiveRecord::Schema.define(:version => 20130702044735) do
     t.datetime "updated_at",     :null => false
     t.text     "votes"
     t.text     "vote_list"
+    t.string   "sun_bill_id"
   end
 
   create_table "campaigns", :force => true do |t|
