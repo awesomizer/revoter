@@ -1,6 +1,5 @@
 class CongressApi
   include HTTParty
-  debug_output $stdout
   base_uri 'http://congress.api.sunlightfoundation.com'
 
   def initialize
@@ -31,9 +30,6 @@ class CongressApi
       self.class.get('/legislators', options).parsed_response
   end
 
-  def roll_call voter_ids
-    # list of voters with vote and individual info
-  end
 end
 
 
