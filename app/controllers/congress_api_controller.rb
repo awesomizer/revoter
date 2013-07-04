@@ -44,7 +44,8 @@ class CongressApiController < ApplicationController
     voter_ids.each do |id|
       results = api.get_legislator(id.key)
       results = results["results"][0]
-      roll_call << {vote_record: {bioguide_id: results[id.key],
+      roll_call << {vote_record: {bioguide_id: results["bioguide_id"],
+                    position: id[id.key],              
                     state: results["state"],
                     state_rank: results["state_rank"],
                     first_name: results["first_name"],
