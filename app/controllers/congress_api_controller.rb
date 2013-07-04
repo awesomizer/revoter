@@ -13,33 +13,35 @@ class CongressApiController < ApplicationController
                         last_action: bill_results["last_action"], 
                         vote_list: bill_results["votes"],
                         urls: bill_results["urls"])
-      @votes = votes(api, @bill.vote_list)
+      @votes = votes(@bill.vote_list)
   end
   
 
   private
 
-  def votes api, vote_list
+  def votes vote_list
+    api = CongressApi.new
     vote_list.each do |v|
       @votes = []
       vote_results = api.get_vote(v["roll_id"])
       vote_results = vote_results["results"][0]
-      @votes << Vote.create(question: vote_results["question"], 
+      @votes << Vote.find_or_create_by(question: vote_results["question"], 
                            required: vote_results["required"], 
                            result: vote_results["result"], 
                            roll_id: vote_results["roll_id"], 
                            vote_type: vote_results["vote_type"],
                            breakdown: vote_results["breakdown"],
-                           voter_ids: vote_results["voter_ids"], 
+                           roll_call: roll_call(vote_results["voter_ids"]), 
                            bill_id: @bill.id)
     end
   end
 
-  def roll_call api, voter_ids
-      @roll_call = []
-      legislator_results = api.roll_call(voter_ids)
-      legislator_results = legislator_results["results"][0]
-      @roll_call << Legislator.create(bioguide_id: legislator_results["bioguide_id"],
+  def roll_call voter_ids
+    api = CongressApi.new
+    roll_call = []
+    legislator_results = api.roll_call(voter_ids)
+    legislator_results = legislator_results["results"][0]
+    roll_call << Legislator.create(bioguide_id: legislator_results["bioguide_id"],
                                       
     end
   end
