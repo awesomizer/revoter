@@ -2,11 +2,11 @@
 
 FactoryGirl.define do
   factory :vote do
-    roll_id "MyString"
-    vote_type "MyString"
-    question "MyString"
-    required "MyString"
-    voter_ids "MyText"
-    result "MyString"
+    roll_id "s168-2013"
+    vote_type "vote"
+    question "Should we do it?"
+    required "1/2"
+    voter_ids { {"A000360"=>"Yea", "A000368"=>"Yea", "B001230"=>"Yea", "B001261"=>"Nay", "B000243"=>"Yea", "B001265"=>"Yea", "B001267"=>"Yea", "B001277"=>"Yea", "B000575"=>"Nay", "B001236"=>"Nay", "B000711"=>"Yea", "B000944"=>"Yea", "B001135"=>"Nay", "C000127"=>"Yea", "C000141"=>"Yea", "C000174"=>"Yea", "C001070"=>"Yea", "C000286"=>"Nay", "C001100"=>"Yea", "C000542"=>"Nay", "C000560"=>"Nay", "C000567"=>"Nay", "C001035"=>"Yea", "C001088"=>"Yea", "C001071"=>"Yea", "C001056"=>"Nay", "C001099"=>"Yea", "C000880"=>"Nay", "C001098"=>"Nay", "D000607"=>"Yea", "D000563"=>"Yea", "E000285"=>"Nay", "F000062"=>"Yea", "F000463"=>"Nay", "F000444"=>"Yea", "F000457"=>"Yea", "G000555"=>"Yea", "G000359"=>"Yea", "G000386"=>"Nay", "H001049"=>"Yea", "H000206"=>"Yea", "H000338"=>"Yea", "H001046"=>"Yea", "H001069"=>"Yea", "H001041"=>"Yea", "H001042"=>"Yea", "H001061"=>"Yea", "I000024"=>"Nay", "I000055"=>"Nay", "J000291"=>"Nay", "J000177"=>"Yea", "J000293"=>"Nay", "K000384"=>"Yea", "K000383"=>"Yea", "K000360"=>"Yea", "K000367"=>"Yea", "L000550"=>"Yea", "L000174"=>"Yea", "L000577"=>"Nay", "L000261"=>"Yea", "M001183"=>"Yea", "M000303"=>"Yea", "M001170"=>"Yea", "M000355"=>"Nay", "M000639"=>"Yea", "M001176"=>"Yea", "M000702"=>"Yea", "M000934"=>"Nay", "M001153"=>"Yea", "M001169"=>"Yea", "M001111"=>"Yea", "N000032"=>"Yea", "P000603"=>"Nay", "P000449"=>"Nay", "P000590"=>"Yea", "R000122"=>"Yea", "R000146"=>"Yea", "R000584"=>"Nay", "R000307"=>"Nay", "R000361"=>"Yea", "R000595"=>"Yea", "S000033"=>"Yea", "S001194"=>"Yea", "S000148"=>"Yea", "S001184"=>"Nay", "S001141"=>"Nay", "S001181"=>"Yea", "S000320"=>"Nay", "S000770"=>"Yea", "T000464"=>"Yea", "T000250"=>"Nay", "T000461"=>"Nay", "U000038"=>"Yea", "U000039"=>"Yea", "V000127"=>"Nay", "W000805"=>"Yea", "W000817"=>"Yea", "W000802"=>"Yea", "W000437"=>"Nay", "W000779"=>"Yea"} } 
+    result "Bill Passed"
   end
 end
