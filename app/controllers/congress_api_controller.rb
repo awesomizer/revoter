@@ -3,9 +3,10 @@ class CongressApiController < ApplicationController
 
   def bill
     api = CongressApi.new
-    results = api.get_bill(params[:bill_type], params[:bill_number], params[:congress])
+    sun_bill_id = params[:bill_type] + params[:bill_number] + "-" + params[:congress]
+    results = api.get_bill(sun_bill_id)
     results = results["results"][0]
-    @bill = Bill.find_or_create_by(sun_bill_id: results["bill_id"]) do |b|
+    @bill = Bill.find_or_create_by_sun_bill_id(results["bill_id"]) do |b|
                         b.official_title = results["official_title"] 
                         b.nicknames = results["nickname"] 
                         b.summary_short = results["summary_short"] 
@@ -26,13 +27,13 @@ class CongressApiController < ApplicationController
       @votes = []
       results = api.get_vote(v["roll_id"])
       results = results["results"][0]
-      @votes << Vote.find_or_create_by(roll_id: results["roll_id"]) do |v|
+      @votes << Vote.find_or_create_by_roll_id(results["roll_id"]) do |v|
                           v.question = results["question"] 
                           v.required = results["required"] 
                           v.result = results["result"] 
                           v.vote_type = results["vote_type"]
                           v.breakdown = results["breakdown"]
-                          v.roll_call = roll_call(vote_results["voter_ids"]) 
+                          v.voter_ids = results["voter_ids"] 
                           v.bill_id = @bill.id
       end
     end
@@ -42,10 +43,10 @@ class CongressApiController < ApplicationController
     api = CongressApi.new
     roll_call = []
     voter_ids.each do |id|
-      results = api.get_legislator(id.key)
+      results = api.get_legislator(id[0])
       results = results["results"][0]
       roll_call << {vote_record: {bioguide_id: results["bioguide_id"],
-                    position: id[id.key],              
+                    position: id[1],              
                     state: results["state"],
                     state_rank: results["state_rank"],
                     first_name: results["first_name"],
