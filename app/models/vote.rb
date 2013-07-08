@@ -1,5 +1,9 @@
 class Vote < ActiveRecord::Base
-  attr_accessible :question, :required, :result, :roll_id, :vote_type, :breakdown, :voter_ids, :bill_id, :roll_call
+
+  serialize :breakdown
+  serialize :voter_ids
+
+  attr_accessible :question, :required, :result, :roll_id, :vote_type, :breakdown, :voter_ids, :bill_id
 
   belongs_to :bill
   has_and_belongs_to_many :legislators
