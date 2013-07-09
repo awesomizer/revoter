@@ -33,13 +33,15 @@ class CongressApiController < ApplicationController
                           v.result = results["result"] 
                           v.vote_type = results["vote_type"]
                           v.breakdown = results["breakdown"]
-                          v.voter_ids = results["voter_ids"] 
+                          v.voter_ids = results["voter_ids"]
+                          v.voters = results["voters"]
                           v.bill_id = @bill.id
       end
     end
+    @votes
   end
 
-  def roll_call voter_ids
+  def roll_call voter_ids # create legislators here, just need info from vote.voters, no api call
     api = CongressApi.new
     @roll_call = []
     voter_ids.each do |id|
