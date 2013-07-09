@@ -41,19 +41,20 @@ class CongressApiController < ApplicationController
 
   def roll_call voter_ids
     api = CongressApi.new
-    roll_call = []
+    @roll_call = []
     voter_ids.each do |id|
       results = api.get_legislator(id[0])
       results = results["results"][0]
-      roll_call << {vote_record: {bioguide_id: results["bioguide_id"],
+      @roll_call << {vote_record: {bioguide_id: results["bioguide_id"],
                     position: id[1],              
                     state: results["state"],
+                    state_name: results["state_name"],
                     state_rank: results["state_rank"],
                     first_name: results["first_name"],
                     nickname: results["nickname"],
                     last_name: results["last_name"]}}
     end
-    roll_call
+    @roll_call
   end
 
 end
