@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130709022004) do
+ActiveRecord::Schema.define(:version => 20130709035628) do
 
   create_table "bills", :force => true do |t|
     t.string   "official_title"
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(:version => 20130709022004) do
     t.datetime "updated_at", :null => false
     t.integer  "bill_id"
     t.text     "breakdown"
+    t.text     "voters"
   end
 
 end
