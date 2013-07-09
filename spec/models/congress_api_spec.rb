@@ -6,13 +6,13 @@ describe CongressApi do
 
   it 'should retrieve bill information with valid bill info' do
       api = CongressApi.new 
-      response = api.get_bill('hr', '3590', '111')
-      expect(response["results"][0]["bill_id"]).to eq('hr3590-111')
+      response = api.get_bill('s744-113')
+      expect(response["results"][0]["bill_id"]).to eq('s744-113')
   end
 
   it 'should display an error message with invalid bill info' do
       api = CongressApi.new 
-      response = api.get_bill('hr', '3590', 'xxx')
+      response = api.get_bill('hr3590-xxx')
       expect(response).to raise_error
   end
   
