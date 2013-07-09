@@ -5,6 +5,7 @@ class Legislator < ActiveRecord::Base
     :title,
     :chamber,
     :state_rank,
+    :state_name,
     :term_start,
     :term_end,
     :first_name,
