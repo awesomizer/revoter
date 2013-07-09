@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130708182541) do
+ActiveRecord::Schema.define(:version => 20130709022004) do
 
   create_table "bills", :force => true do |t|
     t.string   "official_title"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20130708182541) do
     t.string   "last_name"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "state_name"
   end
 
   create_table "legislators_votes", :id => false, :force => true do |t|
