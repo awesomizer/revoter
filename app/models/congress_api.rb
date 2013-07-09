@@ -17,7 +17,7 @@ class CongressApi
     options = {query: 
                {apikey: ENV["SUNLIGHT_KEY"], 
                 roll_id: roll_id, 
-                fields: 'roll_id,vote_type,question,required,breakdown,voter_ids,result'}}
+                fields: 'roll_id,vote_type,question,required,breakdown,voter_ids,voters,result'}}
       self.class.get('/votes', options).parsed_response
   end
 
