@@ -1,7 +1,6 @@
-class CongressApiController < ApplicationController
+class BillsController < ApplicationController
 
-
-  def bill
+  def show
     api = CongressApi.new
     sun_bill_id = params[:bill_type] + params[:bill_number] + "-" + params[:congress]
     results = api.get_bill(sun_bill_id)
@@ -17,7 +16,6 @@ class CongressApiController < ApplicationController
     end
       @votes = votes(@bill.vote_list)
   end
-  
 
   private
 
@@ -39,24 +37,6 @@ class CongressApiController < ApplicationController
       end
     end
     @votes
-  end
-
-  def roll_call voter_ids # create legislators here, just need info from vote.voters, no api call
-    api = CongressApi.new
-    @roll_call = []
-    voter_ids.each do |id|
-      results = api.get_legislator(id[0])
-      results = results["results"][0]
-      @roll_call << {vote_record: {bioguide_id: results["bioguide_id"],
-                    position: id[1],              
-                    state: results["state"],
-                    state_name: results["state_name"],
-                    state_rank: results["state_rank"],
-                    first_name: results["first_name"],
-                    nickname: results["nickname"],
-                    last_name: results["last_name"]}}
-    end
-    @roll_call
   end
 
 end
