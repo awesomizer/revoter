@@ -9,5 +9,5 @@ class Vote < ActiveRecord::Base
   belongs_to :bill
   has_and_belongs_to_many :legislators
 
-  validates_presence_of :roll_id, :uniqueness => :true
+  validates :roll_id, :presence => true, :uniqueness => true
 end
