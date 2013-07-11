@@ -40,6 +40,7 @@ group :test do
   gem "cucumber-rails",   ">= 1.3.1", :group => :test, :require => false
   gem "launchy",          ">= 2.2.0", :group => :test
   gem "capybara",         ">= 2.0.3", :group => :test
+  gem "shoulda",          ">= 3.5.0", :group => :test
 end
 
 group :production do
