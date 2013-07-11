@@ -1,7 +1,7 @@
 class VotesController < ApplicationController
 
   def show
-    @vote = Vote.where(roll_id: params[:roll_id])
+    @vote = Vote.find(params[:id])
   end
 
 end
