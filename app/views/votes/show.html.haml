@@ -18,6 +18,9 @@
   %li
     = "Present: #{@vote.breakdown["total"]["Present"]}"
 
-%p
-  = p @vote.inspect 
-
+%h3
+  Roll Call
+%ul
+  - @vote.voters.each_value do |v|
+    %li
+      = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]} (#{v["vote"]})"
