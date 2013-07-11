@@ -1,6 +1,6 @@
 class BillsController < ApplicationController
 
-  def show
+  def find
     api = CongressApi.new
     sun_bill_id = params[:bill_type] + params[:bill_number] + "-" + params[:congress]
     results = api.get_bill(sun_bill_id)
@@ -15,7 +15,13 @@ class BillsController < ApplicationController
                         b.urls = results["urls"]
     end
       @votes = votes(@bill.vote_list)
+#      params[:id] = @bill.id
+      render :show
   end
+
+  def show
+  end
+
 
   private
 
