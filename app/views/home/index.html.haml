@@ -8,8 +8,8 @@
 %h3 
   Find a Bill
 
-= form_tag({:controller => :congress_api, :action => :bill}, :method => :get) do
-  = radio_button_tag :bill_type, "s"
+= form_tag({:controller => :bills, :action => :find}, :method => :get) do
+  = radio_button_tag :bill_type, "s", {:checked => true}
   = label_tag "Senate Bill"
   = radio_button_tag :bill_type, "sres"
   = label_tag "Senate Resolution"
