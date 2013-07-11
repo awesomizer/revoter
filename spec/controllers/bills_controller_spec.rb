@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe CongressApiController do
+describe BillsController do
 
-  context 'GET #bill' do
+  context 'GET #find' do
 
     it 'retrieves bill information and assign it to an instance variable' do
       bill = FactoryGirl.create(:bill)
-      get :bill, {bill_type: "s", bill_number: "744", congress: "113"}
+      get :find, {bill_type: "s", bill_number: "744", congress: "113"}
       assigns(:bill).should eq(bill)
     end
 
