@@ -1,3 +1,23 @@
+%h2
+  = @vote.question
+
+%p
+  = @vote.bill.summary_short
+
+%ul
+  %li
+    = "Result: #{@vote.result}"
+  %li
+    = "Required: #{@vote.required}"
+  %li
+    = "Yea: #{@vote.breakdown["total"]["Yea"]}"
+  %li
+    = "Nay: #{@vote.breakdown["total"]["Nay"]}"
+  %li
+    = "Not Voting: #{@vote.breakdown["total"]["Not Voting"]}"
+  %li
+    = "Present: #{@vote.breakdown["total"]["Present"]}"
+
 %p
   = p @vote.inspect 
-  = p @vote.voters.inspect
+
