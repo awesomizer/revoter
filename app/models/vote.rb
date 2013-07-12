@@ -65,23 +65,26 @@ class Vote < ActiveRecord::Base
     "WY" => {pop: 576412, percent: 0.18, one_per: 1.00} 
   }
 
-  def self.fractional_vote voters, system
+  def self.fractional_vote voters, system, required
     votes = []
-    tally = {"Yea" => 0, "Nay" => 0, "Present" => 0, "Not Voting" => 0}
+    tally = {"Result" => "", "Yea" => 0.0, "Nay" => 0.0, "Present" => 0.0, "Not Voting" => 0.0}
     voters.each_value do |v|
       weight = STATE_VOTE_STATS[v["voter"]["state"]][system] / 2
       votes << sprintf('%.2f', weight)
-      tally[v["vote"]] += weight  
+      tally[v["vote"]] += weight 
     end
     tally.each do |t, n|
-      tally[t] = sprintf('%.2f', n)
+      if tally[t].is_a? Float
+        tally[t] = sprintf('%.2f', n)
+      end
     end
+    tally = vote_result(tally, required)
     return votes, tally
   end
 
-  def self.integer_vote voters, system
+   def self.integer_vote voters, system, required
     votes = []
-    tally = {"Yea" => 0, "Nay" => 0, "Present" => 0, "Not Voting" => 0}
+    tally = {"Result" => "", "Yea" => 0, "Nay" => 0, "Present" => 0, "Not Voting" => 0}
     voters.each_value do |v|
       vote = STATE_VOTE_STATS[v["voter"]["state"]][system].to_i
       if vote == 1
@@ -102,7 +105,17 @@ class Vote < ActiveRecord::Base
       votes << vote
       tally[v["vote"]] += vote 
     end
+    tally = vote_result(tally, required)
     return votes, tally
+  end
+
+  def self.vote_result tally, required
+    if required == "1/2"
+      tally["Yea"].to_f > 50 ? tally["Result"] = "Passed" : tally["Result"] = "Rejected"
+    elsif required == "3/5"
+      tally["Yea"].to_f >= 60 ? tally["Result"] = "Passed" : tally["Result"] = "Rejected"
+    end
+    tally
   end
 
 end
