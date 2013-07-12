@@ -71,14 +71,12 @@ class Vote < ActiveRecord::Base
     pop_weighted_votes = []
     tally = {"Yea" => 0, "Nay" => 0, "Present" => 0, "Not Voting" => 0}
     voters.each_value do |v|
-      vote = v["vote"]
-      state = v["voter"]["state"]
-      weight = STATE_VOTE_STATS[state][:percent] / 2
-      pop_weighted_votes << sprintf('%.2f', weight)
-      tally[vote] += weight  
+      pop_weight = STATE_VOTE_STATS[v["voter"]["state"]][:percent] / 2
+      pop_weighted_votes << sprintf('%.2f', pop_weight)
+      tally[v["vote"]] += weight  
     end
-    tally.each do |vote, num|
-      tally[vote] = sprintf('%.2f', num)
+    tally.each do |vot, num|
+      tally[vot] = sprintf('%.2f', num)
     end
     return pop_weighted_votes, tally
   end
