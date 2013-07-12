@@ -11,10 +11,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130712172658) do
+ActiveRecord::Schema.define(:version => 20130712174531) do
 
   create_table "bills", :force => true do |t|
-    t.string   "official_title"
+    t.text     "official_title"
     t.text     "summary_short"
     t.datetime "last_vote_at"
     t.text     "last_action"
