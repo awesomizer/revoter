@@ -35,16 +35,39 @@
   %li
     = "Present: #{@pop_tally["Present"]}"
 
+%h6
+  One voter minimum per state, extra distributed as whole votes to minimize population differences per vote. <br />States can have an odd number of votes, so this allows for fractional votes.
+%ul
+  %li
+    = "Yea: #{@one_per_frac_tally["Yea"]}"
+  %li
+    = "Nay: #{@one_per_frac_tally["Nay"]}"
+  %li
+    = "Not Voting: #{@one_per_frac_tally["Not Voting"]}"
+  %li
+    = "Present: #{@one_per_frac_tally["Present"]}"
+
+%h6
+  One voter minimum per state, extra distributed as whole votes to minimize population differences per vote. <br />States with odd numbers of votes give the extra vote to the senior senator.
+%ul
+  %li
+    = "Yea: #{@one_per_int_tally["Yea"]}"
+  %li
+    = "Nay: #{@one_per_int_tally["Nay"]}"
+  %li
+    = "Not Voting: #{@one_per_int_tally["Not Voting"]}"
+  %li
+    = "Present: #{@one_per_int_tally["Present"]}"
+
 %h3
   Roll Call
 %ul
   - counter = 0
   - @vote.voters.each_value do |v|
     %li
-      = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]} - vote: #{v["vote"]} weight: #{@pop_votes[counter]}"
+      = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]} - vote: #{v["vote"]} weights: popular-#{@pop_votes[counter]} one_per_fractional-#{@one_per_frac_votes[counter]} one_per_integer-#{@one_per_int_votes[counter]}" 
       - counter += 1
 
 %p
   = pp @vote.inspect
-  = pp @pop_votes.inspect
-  = pp @pop_tally.inspect
+
