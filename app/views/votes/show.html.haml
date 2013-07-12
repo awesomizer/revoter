@@ -65,7 +65,7 @@
   - counter = 0
   - @vote.voters.each_value do |v|
     %li
-      = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]} - vote: #{v["vote"]} weights: popular-#{@pop_votes[counter]} one_per_fractional-#{@one_per_frac_votes[counter]} one_per_integer-#{@one_per_int_votes[counter]}" 
+      = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]} #{v["voter"]["state_rank"]}- vote: #{v["vote"]} weights: popular-#{@pop_votes[counter]} one_per_fractional-#{@one_per_frac_votes[counter]} one_per_integer-#{@one_per_int_votes[counter]}" 
       - counter += 1
 
 %p
