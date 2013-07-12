@@ -68,17 +68,31 @@ class Vote < ActiveRecord::Base
 
 
   def self.pop_weighted voters
-    pop_weighted_votes = []
+    votes = []
     tally = {"Yea" => 0, "Nay" => 0, "Present" => 0, "Not Voting" => 0}
     voters.each_value do |v|
       pop_weight = STATE_VOTE_STATS[v["voter"]["state"]][:percent] / 2
-      pop_weighted_votes << sprintf('%.2f', pop_weight)
+      votes << sprintf('%.2f', pop_weight)
       tally[v["vote"]] += weight  
     end
     tally.each do |vot, num|
       tally[vot] = sprintf('%.2f', num)
     end
-    return pop_weighted_votes, tally
+    return votes, tally
+  end
+
+  def self.one_per_state_fractional voters
+    votes = []
+    tally = {"Yea" => 0, "Nay" => 0, "Present" => 0, "Not Voting" => 0}
+    voters.each_value do |v|
+      vote = STATE_VOTE_STATS[v["voter"]["state"]][:one_per_fraction] / 2
+      votes << sprintf('%.2f', vote)
+      tally[v["vote"]] += vote
+    end
+    tally.each do |vot, num|
+      tally[vot] = sprintf('%.2f', num)
+    end
+    return votes, tally
   end
 
 end
