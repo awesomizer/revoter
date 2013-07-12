@@ -15,7 +15,6 @@ class BillsController < ApplicationController
                         b.urls = results["urls"]
     end
       @votes = votes(@bill.vote_list)
-#      params[:id] = @bill.id
       render :show
   end
 
@@ -27,19 +26,22 @@ class BillsController < ApplicationController
 
   def votes vote_list
     api = CongressApi.new
+    @votes = []
     vote_list.each do |v|
-      @votes = []
-      results = api.get_vote(v["roll_id"])
-      results = results["results"][0]
-      @votes << Vote.find_or_create_by_roll_id(results["roll_id"]) do |v|
-                          v.question = results["question"] 
-                          v.required = results["required"] 
-                          v.result = results["result"] 
-                          v.vote_type = results["vote_type"]
-                          v.breakdown = results["breakdown"]
-                          v.voter_ids = results["voter_ids"]
-                          v.voters = results["voters"]
-                          v.bill_id = @bill.id
+      if v["chamber"] == "senate"
+        results = api.get_vote(v["roll_id"])
+        results = results["results"][0]
+        vote = Vote.find_or_create_by_roll_id(results["roll_id"]) do |v|
+                            v.question = results["question"] 
+                            v.required = results["required"] 
+                            v.result = results["result"] 
+                            v.vote_type = results["vote_type"]
+                            v.breakdown = results["breakdown"]
+                            v.voter_ids = results["voter_ids"]
+                            v.voters = results["voters"]
+                            v.bill_id = @bill.id
+        end
+        @votes << vote
       end
     end
     @votes
