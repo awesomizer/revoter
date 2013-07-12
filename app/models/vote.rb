@@ -84,9 +84,15 @@ class Vote < ActiveRecord::Base
     tally = {"Yea" => 0, "Nay" => 0, "Present" => 0, "Not Voting" => 0}
     voters.each_value do |v|
       vote = STATE_VOTE_STATS[v["voter"]["state"]][system].to_i
-      if vote % 2 == 0
+      if vote == 1
+        if v["voter"]["state_rank"] == "senior"
+          vote = 1
+        else
+          vote = 0
+        end
+      elsif vote % 2 == 0
         vote = vote / 2
-      else
+      else vote % 2 == 1
         if v["voter"]["state_rank"] == "senior"
           vote = (vote + 1) / 2
         else
