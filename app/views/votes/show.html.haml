@@ -27,6 +27,8 @@
   Popular, Strictly based on population with fractional votes
 %ul
   %li
+    = "Result: #{@pop_tally["Result"]}"
+  %li
     = "Yea: #{@pop_tally["Yea"]}"
   %li
     = "Nay: #{@pop_tally["Nay"]}"
@@ -39,6 +41,8 @@
   One voter minimum per state, extra distributed as whole votes to minimize population differences per vote. <br />States can have an odd number of votes, so this allows for fractional votes.
 %ul
   %li
+    = "Result: #{@one_per_frac_tally["Result"]}"
+  %li
     = "Yea: #{@one_per_frac_tally["Yea"]}"
   %li
     = "Nay: #{@one_per_frac_tally["Nay"]}"
@@ -50,6 +54,8 @@
 %h6
   One voter minimum per state, extra distributed as whole votes to minimize population differences per vote. <br />States with odd numbers of votes give the extra vote to the senior senator.
 %ul
+  %li
+    = "Result: #{@one_per_int_tally["Result"]}"
   %li
     = "Yea: #{@one_per_int_tally["Yea"]}"
   %li
