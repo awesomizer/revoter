@@ -11,7 +11,8 @@
   = "Required for Passage: #{@vote.required}"
 
 %h6
-  Traditional/ <br />
+  Traditional /
+%p
   Two votes per state. 
 
 %ul
@@ -27,7 +28,8 @@
     = "Present: #{@vote.breakdown["total"]["Present"]}"
 
 %h6
-  Popular/ <br />
+  Popular /
+%p
   Strictly based on population with fractional votes.
 
 %ul
@@ -43,7 +45,8 @@
     = "Present: #{@pop_tally["Present"]}"
 
 %h6
-  One Voter Minimum Per State/ <br />
+  One Vote Minimum with Fractions / 
+%p
   50 votes are distributed to states in the way that <br />
   minimizes the population of people represented by that vote. <br />
   Divide a state's votes evenly between senators.
@@ -61,7 +64,9 @@
     = "Present: #{@one_per_frac_tally["Present"]}"
 
 %h6
-  One Voter Minimum Per State/ <br />
+  One Vote Minimum with Whole Votes /
+
+%p  
   50 votes are distributed to states in the way that <br />
   minimizes the population of people represented by that vote. <br />
   For states with an odd number of votes, give the extra (or only) vote to the senior senator. 
@@ -78,7 +83,7 @@
   %li
     = "Present: #{@one_per_int_tally["Present"]}"
 
-%h3#roll-call-link
+%h3
   Roll Call
 
 %ul#roll-call-list
