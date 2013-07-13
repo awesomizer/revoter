@@ -87,26 +87,38 @@ class Vote < ActiveRecord::Base
     tally = {"Result" => "", "Yea" => 0, "Nay" => 0, "Present" => 0, "Not Voting" => 0}
     voters.each_value do |v|
       vote = STATE_VOTE_STATS[v["voter"]["state"]][system].to_i
-      if vote == 1
-        if v["voter"]["state_rank"] == "senior"
-          vote = 1
-        else
-          vote = 0
-        end
-      elsif vote % 2 == 0
-        vote = vote / 2
-      else vote % 2 == 1
-        if v["voter"]["state_rank"] == "senior"
-          vote = (vote + 1) / 2
-        else
-          vote = (vote - 1) / 2
-        end
-      end
+      vote = int_vote_calculator(vote, v)
       votes << vote
       tally[v["vote"]] += vote 
     end
     tally = vote_result(tally, required)
     return votes, tally
+  end
+
+  def self.int_vote_calculator vote, v
+    if vote == 1
+      vote = single_vote(v["voter"]["state_rank"], vote)
+    elsif vote % 2 == 0
+      vote = vote / 2
+    else vote % 2 == 1
+      vote = odd_vote(v["voter"]["state_rank"], vote)
+    end
+  end
+
+  def self.single_vote rank, vote
+    if rank == "senior"
+      vote = 1
+    else
+      vote = 0
+    end
+  end
+
+  def self.odd_vote rank, vote
+    if rank == "senior"
+      vote = (vote + 1) / 2
+    else
+      vote = (vote - 1) / 2
+    end
   end
 
   def self.vote_result tally, required
