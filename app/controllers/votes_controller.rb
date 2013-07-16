@@ -10,12 +10,12 @@ class VotesController < ApplicationController
     gon.one_per_frac_votes, gon.one_per_frac_tally = @one_per_frac_votes, @one_per_frac_tally
     gon.one_per_int_votes, gon.one_per_int_tally = @one_per_int_votes, @one_per_int_tally
 
-    voters = []
+    roll_call = []
     @vote.voters.each_value do |v|
       voter = { last_name: v["voter"]["last_name"], first_name: v["voter"]["first_name"], state_name: v["voter"]["state_name"], state_rank: v["voter"]["state_rank"], vote: v["vote"] } 
-      voters << voter
+      roll_call << voter
     end
-    gon.voters = voters
+    gon.voters = roll_call
   end
 
 end
