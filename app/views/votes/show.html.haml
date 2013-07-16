@@ -11,7 +11,7 @@
   = "Required for Passage: #{@vote.required}"
 
 %div.traditional-vote
-  %h6.traditional-vote-link
+  %h6
     Traditional /
   %p
     Two votes per state. 
@@ -29,7 +29,7 @@
       = "Present: #{@vote.breakdown["total"]["Present"]}"
 
 %div.popular-vote
-  %h6.popular-vote-link
+  %h6
     Popular /
   %p
     Strictly based on population with fractional votes.
@@ -46,44 +46,46 @@
     %li
       = "Present: #{@pop_tally["Present"]}"
 
-%h6.faction-vote-link
-  One Vote Minimum with Fractions / 
-%p
-  50 votes are distributed to states in the way that <br />
-  minimizes the population of people represented by that vote. <br />
-  Divide a state's votes evenly between senators.
+%div.fraction-vote
+  %h6
+    One Vote Minimum with Fractions / 
+  %p
+    50 votes are distributed to states in the way that <br />
+    minimizes the population of people represented by that vote. <br />
+    Divide a state's votes evenly between senators.
 
-%ul.faction-vote-tally
-  %li
-    = "Result: #{@one_per_frac_tally["Result"]}"
-  %li
-    = "Yea: #{@one_per_frac_tally["Yea"]}"
-  %li
-    = "Nay: #{@one_per_frac_tally["Nay"]}"
-  %li
-    = "Not Voting: #{@one_per_frac_tally["Not Voting"]}"
-  %li
-    = "Present: #{@one_per_frac_tally["Present"]}"
+  %ul.faction-vote-tally
+    %li
+      = "Result: #{@one_per_frac_tally["Result"]}"
+    %li
+      = "Yea: #{@one_per_frac_tally["Yea"]}"
+    %li
+      = "Nay: #{@one_per_frac_tally["Nay"]}"
+    %li
+      = "Not Voting: #{@one_per_frac_tally["Not Voting"]}"
+    %li
+      = "Present: #{@one_per_frac_tally["Present"]}"
 
-%h6.int-vote-link
-  One Vote Minimum with Whole Votes /
+%div.int-vote
+  %h6
+    One Vote Minimum with Whole Votes /
 
-%p  
-  50 votes are distributed to states in the way that <br />
-  minimizes the population of people represented by that vote. <br />
-  For states with an odd number of votes, give the extra (or only) vote to the senior senator. 
+  %p  
+    50 votes are distributed to states in the way that <br />
+    minimizes the population of people represented by that vote. <br />
+    For states with an odd number of votes, give the extra (or only) vote to the senior senator. 
 
-%ul.int-vote-tally
-  %li
-    = "Result: #{@one_per_int_tally["Result"]}"
-  %li
-    = "Yea: #{@one_per_int_tally["Yea"]}"
-  %li
-    = "Nay: #{@one_per_int_tally["Nay"]}"
-  %li
-    = "Not Voting: #{@one_per_int_tally["Not Voting"]}"
-  %li
-    = "Present: #{@one_per_int_tally["Present"]}"
+  %ul.int-vote-tally
+    %li
+      = "Result: #{@one_per_int_tally["Result"]}"
+    %li
+      = "Yea: #{@one_per_int_tally["Yea"]}"
+    %li
+      = "Nay: #{@one_per_int_tally["Nay"]}"
+    %li
+      = "Not Voting: #{@one_per_int_tally["Not Voting"]}"
+    %li
+      = "Present: #{@one_per_int_tally["Present"]}"
 
 %h3
   Roll Call
@@ -94,31 +96,60 @@
     %li
       = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]} #{v["voter"]["state_rank"]}- vote: #{v["vote"]}" 
       - counter += 1
-
 %p
   = pp @vote.inspect
 
 :javascript
-  $( document ).ready( function() {
+  $( document ).ready( function() { // still need mouse change on rollover for click on div events
 
       var rollCall = function() {
 
-  		  var $rollCall = $( "ul#roll-call" );
-          var $popularVote = $( ".popular-vote" );
+  		  var $rollCall = $( "ul#roll-call li" );
+          var $traditionalVote = $( "div.traditional-vote" );
+          var $popularVote = $( "div.popular-vote" );
+          var $onePerFractionalVote = $( "div.fraction-vote" );
+          var $onePerIntVote = $( "div.int-vote" );
+          var voters = gon.voters;
+
+          var traditionalRollCall = function() {
+            for ( var i = 0; i < $rollCall.length; i += 1 ) {
+                  $rollCall[i].textContent = ( voters[i].last_name + ", " + voters[i].first_name );
+              };
+          };
 
           var popularRollCall = function() {
-              console.log("method has been called");
-              console.log(gon.voters);
-              var voters = gon.voters
-              $.each( voters, function( index, value ) {
-                  console.log(index)
-                  console.log(value)
-                $rollCall.append("<li>" + this.last_name + ", " + this.first_name + " - weight: " + gon.pop_votes[index] + "</li>");
-              });
+            for ( var i = 0; i < $rollCall.length; i += 1 ) {
+                  $rollCall[i].textContent = ( voters[i].last_name + ", " + voters[i].first_name + " - weight: " + gon.pop_votes[i] );
+              };
           };
+
+          var onePerFractionalRollCall = function() {
+              for ( var i = 0; i < $rollCall.length; i += 1 ) {
+                  $rollCall[i].textContent = ( voters[i].last_name + ", " + voters[i].first_name + " - weight: " + gon.one_per_frac_votes[i] );
+              };
+          };
+
+          var onePerIntRollCall = function() {
+              for ( var i = 0; i < $rollCall.length; i += 1 ) {
+                  $rollCall[i].textContent = ( voters[i].last_name + ", " + voters[i].first_name + " - weight: " + gon.one_per_int_votes[i] );
+              };
+          };
+
           $popularVote.click( function() {
-          console.log("click works");
-          popularRollCall();
-          });
+              popularRollCall();
+          }); 
+          
+          $traditionalVote.click( function() {
+              traditionalRollCall();
+          }); 
+
+          $onePerFractionalVote.click( function() {
+              onePerFractionalRollCall();
+          }); 
+
+          $onePerIntVote.click( function() {
+              onePerIntRollCall();
+          }); 
+
       }();
   });
