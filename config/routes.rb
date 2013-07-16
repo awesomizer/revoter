@@ -10,8 +10,8 @@ Votevote::Application.routes.draw do
   devise_for :users
   resources :users
   
-  # congress_api matchers
-  get '/bill', to: 'bills#find', as: :bill_find
-  get '/bill/:id', to: 'bills#show', as: :bill
-  get '/vote/:id', to: 'votes#show', as: :vote
+  # controller matchers
+  get '/bill', to: 'bills#find', as: :find_bill
+  get '/bills/:id', to: 'bills#show'
+  get '/votes/:id', to: 'votes#show'
 end
