@@ -28,9 +28,9 @@
       - if @vote.breakdown["total"]["Present"] > 0
         %li
           = "Present: #{@vote.breakdown["total"]["Present"]}"
-
+    <br />
     %p
-      Two votes per state. 
+      Two votes per state. x x x x x x x x x x x
 
   %div.span3.vote-box#popular-vote
     %h4
@@ -50,8 +50,9 @@
         %li
           = "Present: #{@pop_tally["Present"]}"
 
+    <br />
     %p
-      One person one vote for each American.
+      One person one vote for each American. x x x x x x x x 
 
   %div.span3.vote-box#fraction-vote
     %h4
@@ -71,6 +72,7 @@
         %li
           = "Present: #{@one_per_frac_tally["Present"]}"
 
+    <br />
     %p
       Each state gets one vote and the rest are allocated by population. Divide a state's votes evenly between senators.
 
@@ -91,18 +93,21 @@
       - if @one_per_int_tally["Present"].to_f > 0    
         %li
           = "Present: #{@one_per_int_tally["Present"]}"
+    
+    <br />
     %p  
       Each state gets one vote and the rest are allocated by population. For states with an odd number of votes, give the extra (or only) vote to the senior senator. 
 
-%h3
-  Roll Call
+%div#roll-call
+  %h3
+    Roll Call
 
-%ul#roll-call
-  - counter = 0
-  - @vote.voters.each_value do |v|
-    %li
-      = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]} #{v["voter"]["state_rank"]}- vote: #{v["vote"]}" 
-      - counter += 1
+  %ul
+    - counter = 0
+    - @vote.voters.each_value do |v|
+      %li
+        = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]} #{v["voter"]["state_rank"]}- vote: #{v["vote"]}" 
+        - counter += 1
 %p
   = pp @vote.inspect
 
