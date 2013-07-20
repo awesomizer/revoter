@@ -1,4 +1,7 @@
 @import "bootstrap";
 @import "bootstrap-responsive";
-
+@import "mixins";
+@import "votes";
+@include votes;
+@include border-box;
 body { padding-top: 60px; }
