@@ -1,0 +1,32 @@
+  h4 {
+    text-align: center;
+  }
+
+  p {
+    text-align: justify;
+  }
+
+  li {
+    list-style-type: none;
+    font-size: 1.1em;
+    line-height: 1.5em;
+  }
+
+  div.vote-box {
+      border-right: 1px solid;
+      padding: .8em 2em 1em 2em;
+      height: 10em;
+  }
+
+  div.vote-box-first {
+      border-right: 1px solid;
+      border-left: 1px solid; 
+      padding: .8em 2em 1em 2em;
+      height: 10em;
+  }
+
+  div#roll-call {
+    position: relative;
+    top: 10em;
+  }
+
