@@ -1,0 +1,9 @@
+@mixin border-box { 
+  * {
+    box-sizing: border-box;
+  }
+
+  input {
+    box-sizing: content-box;
+  }
+}
