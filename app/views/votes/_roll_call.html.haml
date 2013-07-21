@@ -1,0 +1,138 @@
+%div#roll-call
+  %h3
+    Roll Call
+
+  %div.row-fluid
+    %div.span6
+      %h4
+        Democrats
+
+      - if vote_present? "D", "Yea"
+        %h5 
+          Yea
+        
+        %ul
+          - @vote.voters.each_value do |v|
+            - if v["voter"]["party"] == 'D' && v["vote"] == 'Yea'
+              %li
+                = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]}  /#{v["voter"]["state_rank"]}" 
+
+      - if vote_present? "D", "Nay"
+        %h5 
+          Nay
+        
+        %ul
+          - @vote.voters.each_value do |v|
+            - if v["voter"]["party"] == 'D' && v["vote"] == 'Nay'
+              %li
+                = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]}  /#{v["voter"]["state_rank"]}" 
+
+      - if vote_present? "D", "Present"
+        %h5 
+          Present
+        
+        %ul
+          - @vote.voters.each_value do |v|
+            - if v["voter"]["party"] == 'D' && v["vote"] == 'Present'
+              %li
+                = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]}  /#{v["voter"]["state_rank"]}" 
+
+      - if vote_present? "D", "Not Voting"
+        %h5 
+          Not Voting
+        
+        %ul
+          - @vote.voters.each_value do |v|
+            - if v["voter"]["party"] == 'D' && v["vote"] == 'Not Voting'
+              %li
+                = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]}  /#{v["voter"]["state_rank"]}" 
+
+    %div.span6
+      %h4
+        Republicans
+
+      - if vote_present? "R", "Yea"
+        %h5 
+          Yea
+        
+        %ul
+          - @vote.voters.each_value do |v|
+            - if v["voter"]["party"] == 'R' && v["vote"] == 'Yea'
+              %li
+                = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]}  /#{v["voter"]["state_rank"]}" 
+
+      - if vote_present? "R", "Nay"
+        %h5 
+          Nay
+        
+        %ul
+          - @vote.voters.each_value do |v|
+            - if v["voter"]["party"] == 'R' && v["vote"] == 'Nay'
+              %li
+                = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]}  /#{v["voter"]["state_rank"]}" 
+
+      - if vote_present? "R", "Present"
+        %h5 
+          Present
+        
+        %ul
+          - @vote.voters.each_value do |v|
+            - if v["voter"]["party"] == 'R' && v["vote"] == 'Present'
+              %li
+                = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]}  /#{v["voter"]["state_rank"]}" 
+
+      - if vote_present? "R", "Not Voting"
+        %h5 
+          Not Voting
+        
+        %ul
+          - @vote.voters.each_value do |v|
+            - if v["voter"]["party"] == 'R' && v["vote"] == 'Not Voting'
+              %li
+                = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]}  /#{v["voter"]["state_rank"]}"      
+      <br />
+
+      %h4
+        Independents
+
+      - if vote_present? "I", "Yea"
+        %h5 
+          Yea
+        
+        %ul
+          - @vote.voters.each_value do |v|
+            - if v["voter"]["party"] == 'I' && v["vote"] == 'Yea'
+              %li
+                = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]}  /#{v["voter"]["state_rank"]}" 
+
+      - if vote_present? "I", "Nay"
+        %h5 
+          Nay
+        
+        %ul
+          - @vote.voters.each_value do |v|
+            - if v["voter"]["party"] == 'I' && v["vote"] == 'Nay'
+              %li
+                = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]}  /#{v["voter"]["state_rank"]}" 
+
+      - if vote_present? "I", "Present"
+        %h5 
+          Present
+        
+        %ul
+          - @vote.voters.each_value do |v|
+            - if v["voter"]["party"] == 'I' && v["vote"] == 'Present'
+              %li
+                = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]}  /#{v["voter"]["state_rank"]}" 
+
+      - if vote_present? "R", "Not Voting"
+        %h5 
+          Not Voting
+        
+        %ul
+          - @vote.voters.each_value do |v|
+            - if v["voter"]["party"] == 'R' && v["vote"] == 'Not Voting'
+              %li
+                = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]}  /#{v["voter"]["state_rank"]}"
+            <br />
+
