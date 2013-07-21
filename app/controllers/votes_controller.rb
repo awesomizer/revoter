@@ -12,7 +12,7 @@ class VotesController < ApplicationController
 
     roll_call = []
     @vote.voters.each_value do |v|
-      voter = { last_name: v["voter"]["last_name"], first_name: v["voter"]["first_name"], state_name: v["voter"]["state_name"], state_rank: v["voter"]["state_rank"], vote: v["vote"] } 
+      voter = { last_name: v["voter"]["last_name"], first_name: v["voter"]["first_name"], state_name: v["voter"]["state_name"], state_rank: v["voter"]["state_rank"], party: v["voter"]["party"], vote: v["vote"] } 
       roll_call << voter
     end
     gon.voters = roll_call
