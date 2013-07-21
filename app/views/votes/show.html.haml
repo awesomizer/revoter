@@ -98,25 +98,21 @@
     %p  
       Each state gets one vote and the rest are allocated by population. For states with an odd number of votes, give the extra (or only) vote to the senior senator. 
 
-%div#roll-call
-  %h3
-    Roll Call
+= render "roll_call"
 
-  %ul
-    - counter = 0
-    - @vote.voters.each_value do |v|
-      %li
-        = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]} #{v["voter"]["state_rank"]}- vote: #{v["vote"]}" 
-        - counter += 1
-%p
-  = pp @vote.inspect
+%div.clear-container
+
+    
+-#%div        
+  -#%p
+    -#= pp @vote.inspect
 
 :javascript
   $( document ).ready( function() { // still need mouse change on rollover for click on div events
 
       var rollCall = function() {
 
-  		  var $rollCall = $( "ul#roll-call li" );
+  		  var $rollCall = $( "div#roll-call li" );
           var $traditionalVote = $( "div.traditional-vote" );
           var $popularVote = $( "div.popular-vote" );
           var $onePerFractionalVote = $( "div.fraction-vote" );
