@@ -2,20 +2,26 @@ class VotesController < ApplicationController
 
   def show
     @vote = Vote.find(params[:id])
-    @pop_votes, @pop_tally = Vote.fractional_vote(@vote.voters, :percent, @vote.required)
-    @one_per_frac_votes, @one_per_frac_tally = Vote.fractional_vote(@vote.voters, :one_per, @vote.required)
-    @one_per_int_votes, @one_per_int_tally = Vote.integer_vote(@vote.voters, :one_per, @vote.required)
-    
-    gon.pop_votes, gon.pop_tally = @pop_votes, @pop_tally
-    gon.one_per_frac_votes, gon.one_per_frac_tally = @one_per_frac_votes, @one_per_frac_tally
-    gon.one_per_int_votes, gon.one_per_int_tally = @one_per_int_votes, @one_per_int_tally
+    @vote_types = ["Yea", "Nay", "Present", "Not Voting"]
+    @pop_votes, @pop_tally = Vote.fractional_vote(@vote.voters, :pop_percent, @vote.required)
+    @one_per_frac_votes, @one_per_frac_tally = Vote.fractional_vote(@vote.voters, :one_vote_weight, @vote.required)
+    @one_per_sen_votes, @one_per_sen_tally = Vote.integer_vote(@vote.voters, :one_vote_weight, @vote.required)
 
-    roll_call = []
-    @vote.voters.each_value do |v|
-      voter = { last_name: v["voter"]["last_name"], first_name: v["voter"]["first_name"], state_name: v["voter"]["state_name"], state_rank: v["voter"]["state_rank"], party: v["voter"]["party"], vote: v["vote"] } 
-      roll_call << voter
+    @vote.voters.each do |v| 
+      Legislator.find_or_create_by_bioguide_id(v[1]["voter"]["bioguide_id"]) do |l|
+        l.state_code =   v[1]["voter"]["state"]
+        l.title =   v[1]["voter"]["title"]
+        l.chamber = v[1]["voter"]["chamber"]
+        l.state_rank = v[1]["voter"]["state_rank"]
+        l.state_name = v[1]["voter"]["state_name"]
+        l.first_name = v[1]["voter"]["first_name"]
+        l.nickname =   v[1]["voter"]["nickname"]
+        l.last_name =  v[1]["voter"]["last_name"]
+        l.party =  v[1]["voter"]["party"]
+        l.state_id = State.find_by_code(v[1]["voter"]["state"]).id
+        l.votes << @vote
+      end
     end
-    gon.voters = roll_call
   end
 
 end
