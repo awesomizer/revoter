@@ -37,7 +37,6 @@ class BillsController < ApplicationController
                             v.result = results["result"] 
                             v.vote_type = results["vote_type"]
                             v.breakdown = results["breakdown"]
-                            v.voter_ids = results["voter_ids"]
                             v.voters = results["voters"]
                             v.bill_id = @bill.id
         end
