@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130712174531) do
+ActiveRecord::Schema.define(:version => 20130722033838) do
 
   create_table "bills", :force => true do |t|
     t.text     "official_title"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(:version => 20130712174531) do
 
   create_table "legislators", :force => true do |t|
     t.string   "bioguide_id"
-    t.string   "state"
+    t.string   "state_code"
     t.string   "title"
     t.string   "chamber"
     t.string   "state_rank"
@@ -41,12 +41,16 @@ ActiveRecord::Schema.define(:version => 20130712174531) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "state_name"
+    t.string   "party"
+    t.integer  "state_id"
   end
 
   create_table "legislators_votes", :id => false, :force => true do |t|
     t.integer "legislator_id"
     t.integer "vote_id"
   end
+
+  add_index "legislators_votes", ["legislator_id", "vote_id"], :name => "index_legislators_votes_on_legislator_id_and_vote_id", :unique => true
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -58,6 +62,16 @@ ActiveRecord::Schema.define(:version => 20130712174531) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "states", :force => true do |t|
+    t.string   "code"
+    t.string   "name"
+    t.integer  "population"
+    t.float    "pop_percent"
+    t.float    "one_vote_weight"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -90,7 +104,6 @@ ActiveRecord::Schema.define(:version => 20130712174531) do
     t.string   "vote_type"
     t.string   "question"
     t.string   "required"
-    t.text     "voter_ids"
     t.string   "result"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
