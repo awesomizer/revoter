@@ -19,6 +19,7 @@ module VotesHelper
     @vote.voters.each_value do |v|
       if v["voter"]["party"] == party && v["vote"] == position
         legislator = get_legislator(v["voter"])
+        item = []
         item = roll_call_item(legislator, roll)
         list << item
       end
@@ -29,15 +30,15 @@ module VotesHelper
   def roll_call_item legislator, *roll
     case roll[0][0]
     when 'traditional'
-      "#{legislator.last_name}, #{legislator.first_name}, #{legislator.state_name} / #{legislator.state_rank} trad"
+      ["#{legislator.last_name}, #{legislator.first_name} - #{legislator.state_name} / #{legislator.state_rank}", 1]
     when 'popular'
-      "#{legislator.last_name}, #{legislator.first_name}, #{legislator.state_name} / #{legislator.state_rank} pop"
+      ["#{legislator.last_name}, #{legislator.first_name} - #{legislator.state_name} / #{legislator.state_rank}", @popular_votes[legislator.bioguide_id]]
     when 'fractional'
-      "#{legislator.last_name}, #{legislator.first_name}, #{legislator.state_name} / #{legislator.state_rank} frac"
+      ["#{legislator.last_name}, #{legislator.first_name} - #{legislator.state_name} / #{legislator.state_rank}", @fractional_votes[legislator.bioguide_id]]
     when 'seniority'
-      "#{legislator.last_name}, #{legislator.first_name}, #{legislator.state_name} / #{legislator.state_rank} sen"
+      ["#{legislator.last_name}, #{legislator.first_name} - #{legislator.state_name} / #{legislator.state_rank}", @seniority_votes[legislator.bioguide_id]]
     else
-      "#{legislator.last_name}, #{legislator.first_name}, #{legislator.state_name} / #{legislator.state_rank} else"
+      ["#{legislator.last_name}, #{legislator.first_name} - #{legislator.state_name} / #{legislator.state_rank}", " "]
     end
   end
 
