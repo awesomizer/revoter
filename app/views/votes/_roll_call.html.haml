@@ -1,5 +1,7 @@
 %div#roll-call
-  %h3
+  - roll ||= ''
+  
+  %h2
     Roll Call
 
   %div.row-fluid
@@ -7,132 +9,44 @@
       %h4
         Democrats
 
-      - if vote_present? "D", "Yea"
-        %h5 
-          Yea
-        
-        %ul
-          - @vote.voters.each_value do |v|
-            - if v["voter"]["party"] == 'D' && v["vote"] == 'Yea'
-              %li
-                = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]}  /#{v["voter"]["state_rank"]}" 
+      - @vote_types.each do |type|
+        - if vote_present? "D", type
+          %h5 
+            = type
 
-      - if vote_present? "D", "Nay"
-        %h5 
-          Nay
-        
-        %ul
-          - @vote.voters.each_value do |v|
-            - if v["voter"]["party"] == 'D' && v["vote"] == 'Nay'
+          %ul
+            - list = roll_call_list "D", type, roll
+            - list.each do |item|
               %li
-                = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]}  /#{v["voter"]["state_rank"]}" 
-
-      - if vote_present? "D", "Present"
-        %h5 
-          Present
-        
-        %ul
-          - @vote.voters.each_value do |v|
-            - if v["voter"]["party"] == 'D' && v["vote"] == 'Present'
-              %li
-                = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]}  /#{v["voter"]["state_rank"]}" 
-
-      - if vote_present? "D", "Not Voting"
-        %h5 
-          Not Voting
-        
-        %ul
-          - @vote.voters.each_value do |v|
-            - if v["voter"]["party"] == 'D' && v["vote"] == 'Not Voting'
-              %li
-                = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]}  /#{v["voter"]["state_rank"]}" 
+                = item
 
     %div.span6
       %h4
         Republicans
 
-      - if vote_present? "R", "Yea"
-        %h5 
-          Yea
-        
-        %ul
-          - @vote.voters.each_value do |v|
-            - if v["voter"]["party"] == 'R' && v["vote"] == 'Yea'
-              %li
-                = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]}  /#{v["voter"]["state_rank"]}" 
+      - @vote_types.each do |type|
+        - if vote_present? "R", type
+          %h5 
+            = type
 
-      - if vote_present? "R", "Nay"
-        %h5 
-          Nay
-        
-        %ul
-          - @vote.voters.each_value do |v|
-            - if v["voter"]["party"] == 'R' && v["vote"] == 'Nay'
+          %ul
+            - list = roll_call_list "R", type, roll
+            - list.each do |item|
               %li
-                = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]}  /#{v["voter"]["state_rank"]}" 
-
-      - if vote_present? "R", "Present"
-        %h5 
-          Present
-        
-        %ul
-          - @vote.voters.each_value do |v|
-            - if v["voter"]["party"] == 'R' && v["vote"] == 'Present'
-              %li
-                = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]}  /#{v["voter"]["state_rank"]}" 
-
-      - if vote_present? "R", "Not Voting"
-        %h5 
-          Not Voting
-        
-        %ul
-          - @vote.voters.each_value do |v|
-            - if v["voter"]["party"] == 'R' && v["vote"] == 'Not Voting'
-              %li
-                = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]}  /#{v["voter"]["state_rank"]}"      
+                = item
       <br />
 
       %h4
         Independents
 
-      - if vote_present? "I", "Yea"
-        %h5 
-          Yea
-        
-        %ul
-          - @vote.voters.each_value do |v|
-            - if v["voter"]["party"] == 'I' && v["vote"] == 'Yea'
-              %li
-                = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]}  /#{v["voter"]["state_rank"]}" 
+      - @vote_types.each do |type|
+        - if vote_present? "I", type
+          %h5 
+            = type
 
-      - if vote_present? "I", "Nay"
-        %h5 
-          Nay
-        
-        %ul
-          - @vote.voters.each_value do |v|
-            - if v["voter"]["party"] == 'I' && v["vote"] == 'Nay'
+          %ul
+            - list = roll_call_list "I", type, roll
+            - list.each do |item|
               %li
-                = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]}  /#{v["voter"]["state_rank"]}" 
-
-      - if vote_present? "I", "Present"
-        %h5 
-          Present
-        
-        %ul
-          - @vote.voters.each_value do |v|
-            - if v["voter"]["party"] == 'I' && v["vote"] == 'Present'
-              %li
-                = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]}  /#{v["voter"]["state_rank"]}" 
-
-      - if vote_present? "R", "Not Voting"
-        %h5 
-          Not Voting
-        
-        %ul
-          - @vote.voters.each_value do |v|
-            - if v["voter"]["party"] == 'R' && v["vote"] == 'Not Voting'
-              %li
-                = "#{v["voter"]["last_name"]}, #{v["voter"]["first_name"]}, #{v["voter"]["state_name"]}  /#{v["voter"]["state_rank"]}"
-            <br />
+                = item
 
