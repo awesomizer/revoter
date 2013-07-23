@@ -41,17 +41,17 @@
 
     %ul.popular-vote-tally
       %li
-        = "#{@pop_tally["Result"]}"
+        = "#{@popular_tally["Result"]}"
       %li
-        = "Yea: #{@pop_tally["Yea"]}"
+        = "Yea: #{@popular_tally["Yea"]}"
       %li
-        = "Nay: #{@pop_tally["Nay"]}"
-      - if @pop_tally["Not Voting"].to_f > 0
+        = "Nay: #{@popular_tally["Nay"]}"
+      - if @popular_tally["Not Voting"].to_f > 0
         %li
-          = "Not Voting: #{@pop_tally["Not Voting"]}"
-      - if @pop_tally["Present"].to_f > 0
+          = "Not Voting: #{@popular_tally["Not Voting"]}"
+      - if @popular_tally["Present"].to_f > 0
         %li
-          = "Present: #{@pop_tally["Present"]}"
+          = "Present: #{@popular_tally["Present"]}"
 
     %p.details
       \- details -
@@ -65,17 +65,17 @@
 
     %ul.faction-vote-tally
       %li
-        = "#{@one_per_frac_tally["Result"]}"
+        = "#{@fractional_tally["Result"]}"
       %li
-        = "Yea: #{@one_per_frac_tally["Yea"]}"
+        = "Yea: #{@fractional_tally["Yea"]}"
       %li
-        = "Nay: #{@one_per_frac_tally["Nay"]}"
-      - if @one_per_frac_tally["Not Voting"].to_f > 0
+        = "Nay: #{@fractional_tally["Nay"]}"
+      - if @fractional_tally["Not Voting"].to_f > 0
         %li
-          = "Not Voting: #{@one_per_frac_tally["Not Voting"]}"
-      - if @one_per_frac_tally["Present"].to_f > 0
+          = "Not Voting: #{@fractional_tally["Not Voting"]}"
+      - if @fractional_tally["Present"].to_f > 0
         %li
-          = "Present: #{@one_per_frac_tally["Present"]}"
+          = "Present: #{@fractional_tally["Present"]}"
 
     %p.details
       \- details -
@@ -89,17 +89,17 @@
 
     %ul.seniority-vote-tally
       %li
-        = "#{@one_per_sen_tally["Result"]}"
+        = "#{@seniority_tally["Result"]}"
       %li
-        = "Yea: #{@one_per_sen_tally["Yea"]}"
+        = "Yea: #{@seniority_tally["Yea"]}"
       %li
-        = "Nay: #{@one_per_sen_tally["Nay"]}"
-      - if @one_per_sen_tally["Not Voting"].to_f > 0 
+        = "Nay: #{@seniority_tally["Nay"]}"
+      - if @seniority_tally["Not Voting"].to_f > 0 
         %li
-          = "Not Voting: #{@one_per_sen_tally["Not Voting"]}"
-      - if @one_per_sen_tally["Present"].to_f > 0    
+          = "Not Voting: #{@seniority_tally["Not Voting"]}"
+      - if @seniority_tally["Present"].to_f > 0    
         %li
-          = "Present: #{@one_per_sen_tally["Present"]}"
+          = "Present: #{@seniority_tally["Present"]}"
     
     %p.details
       \- details -
@@ -107,13 +107,10 @@
     %p.drop  
       Each state gets one vote and the rest are allocated by population. For states with an odd number of votes, give the extra (or only) vote to the senior senator. 
 
-%div.clear-container.three-em
+%div.section-clear
   &nbsp;
-
+  
 = render :partial => "roll_call"
-
-%div.clear-container.two-em
-  &nbsp;
 
 
 :javascript
@@ -136,7 +133,7 @@
           $rollCall.html('#{escape_javascript( render 'roll_call', roll: 'popular' )}');
           break;
         case 'fractional':
-          $rollCall.html('#{escape_javascript( render 'roll_call', roll: 'traditional' )}');
+          $rollCall.html('#{escape_javascript( render 'roll_call', roll: 'fractional' )}');
           break;
         case 'seniority':
           $rollCall.html('#{escape_javascript( render 'roll_call', roll: 'seniority' )}');
