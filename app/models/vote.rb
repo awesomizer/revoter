@@ -12,18 +12,22 @@ class Vote < ActiveRecord::Base
 
 
   def self.fractional_vote voters, system, required
-    votes = []
+    votes = {}
     tally = {"Result" => "", "Yea" => 0.0, "Nay" => 0.0, "Present" => 0.0, "Not Voting" => 0.0}
     voters.each_value do |v|
       state = State.find_by_code(v["voter"]["state"])
-      weight = state.send(system.to_sym) / 2                           
-      votes << sprintf('%.2f', weight)
+      weight = state.send(system.to_sym) / 2 
+      pretty_weight = sprintf('%.2f', weight)
+      voter = v["voter"]["bioguide_id"]
+      votes.merge!({voter => pretty_weight})
       tally[v["vote"]] += weight 
     end
 
     tally.each do |t, n|
       if tally[t].is_a? Float
         tally[t] = sprintf('%.2f', n)
+        tally[t].gsub!(/^0+/, "")
+        tally[t].gsub!(/0$/, "")
       end
     end
     
@@ -32,13 +36,14 @@ class Vote < ActiveRecord::Base
   end
 
   def self.integer_vote voters, system, required
-    votes = []
+    votes = {}
     tally = {"Result" => "", "Yea" => 0, "Nay" => 0, "Present" => 0, "Not Voting" => 0}
     voters.each_value do |v|
       state = State.find_by_code(v["voter"]["state"])
       vote = state.send(system.to_sym).to_i
       weight = int_weight_calculator(vote, v)
-      votes << weight
+      voter = v["voter"]["bioguide_id"]
+      votes.merge!({voter => weight})
       tally[v["vote"]] += weight 
     end
 
