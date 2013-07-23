@@ -3,9 +3,9 @@ class VotesController < ApplicationController
   def show
     @vote = Vote.find(params[:id])
     @vote_types = ["Yea", "Nay", "Present", "Not Voting"]
-    @pop_votes, @pop_tally = Vote.fractional_vote(@vote.voters, :pop_percent, @vote.required)
-    @one_per_frac_votes, @one_per_frac_tally = Vote.fractional_vote(@vote.voters, :one_vote_weight, @vote.required)
-    @one_per_sen_votes, @one_per_sen_tally = Vote.integer_vote(@vote.voters, :one_vote_weight, @vote.required)
+    @popular_votes, @popular_tally = Vote.fractional_vote(@vote.voters, :pop_percent, @vote.required)
+    @fractional_votes, @fractional_tally = Vote.fractional_vote(@vote.voters, :one_vote_weight, @vote.required)
+    @seniority_votes, @seniority_tally = Vote.integer_vote(@vote.voters, :one_vote_weight, @vote.required)
 
     @vote.voters.each do |v| 
       Legislator.find_or_create_by_bioguide_id(v[1]["voter"]["bioguide_id"]) do |l|
