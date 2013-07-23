@@ -14,11 +14,14 @@
           %h5 
             = type
 
-          %ul
+          %table
             - list = roll_call_list "D", type, roll
-            - list.each do |item|
-              %li
-                = item
+            - list.each do |item, weight|
+              %tr
+                %td
+                  = item
+                %td.weight
+                  = weight
 
     %div.span6
       %h4
@@ -26,14 +29,17 @@
 
       - @vote_types.each do |type|
         - if vote_present? "R", type
-          %h5 
+          %h5.indent 
             = type
 
-          %ul
+          %table.right-column
             - list = roll_call_list "R", type, roll
-            - list.each do |item|
-              %li
-                = item
+            - list.each do |item, weight|
+              %tr
+                %td.legislator
+                  = item
+                %td.weight
+                  = weight
       <br />
 
       %h4
@@ -41,12 +47,15 @@
 
       - @vote_types.each do |type|
         - if vote_present? "I", type
-          %h5 
+          %h5.indent 
             = type
 
-          %ul
+          %table.right-column
             - list = roll_call_list "I", type, roll
-            - list.each do |item|
-              %li
-                = item
+            - list.each do |item, weight|
+              %tr
+                %td.legislator
+                  = item
+                %td.weight
+                  = weight
 
