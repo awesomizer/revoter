@@ -28,9 +28,12 @@
       - if @vote.breakdown["total"]["Present"] > 0
         %li
           = "Present: #{@vote.breakdown["total"]["Present"]}"
-    <br />
-    %p
-      Two votes per state. x x x x x x x x x x x
+      
+    %p.details
+      \- details -
+    
+    %p.drop
+      The current sytem, two votes per state.
 
   %div.span3.vote-box#popular-vote
     %h4
@@ -50,13 +53,15 @@
         %li
           = "Present: #{@pop_tally["Present"]}"
 
-    <br />
-    %p
-      One person one vote for each American. x x x x x x x x 
+    %p.details
+      \- details -
+
+    %p.drop
+      One person one vote for each American.
 
   %div.span3.vote-box#fraction-vote
     %h4
-      One Vote Fractional 
+      1+ Fractional 
 
     %ul.faction-vote-tally
       %li
@@ -72,92 +77,88 @@
         %li
           = "Present: #{@one_per_frac_tally["Present"]}"
 
-    <br />
-    %p
+    %p.details
+      \- details -
+    
+    %p.drop
       Each state gets one vote and the rest are allocated by population. Divide a state's votes evenly between senators.
 
-  %div.span3.vote-box#int-vote
+  %div.span3.vote-box#seniority-vote
     %h4
-      One Vote Senority
+      1+ Seniority
 
-    %ul.int-vote-tally
+    %ul.seniority-vote-tally
       %li
-        = "#{@one_per_int_tally["Result"]}"
+        = "#{@one_per_sen_tally["Result"]}"
       %li
-        = "Yea: #{@one_per_int_tally["Yea"]}"
+        = "Yea: #{@one_per_sen_tally["Yea"]}"
       %li
-        = "Nay: #{@one_per_int_tally["Nay"]}"
-      - if @one_per_int_tally["Not Voting"].to_f > 0 
+        = "Nay: #{@one_per_sen_tally["Nay"]}"
+      - if @one_per_sen_tally["Not Voting"].to_f > 0 
         %li
-          = "Not Voting: #{@one_per_int_tally["Not Voting"]}"
-      - if @one_per_int_tally["Present"].to_f > 0    
+          = "Not Voting: #{@one_per_sen_tally["Not Voting"]}"
+      - if @one_per_sen_tally["Present"].to_f > 0    
         %li
-          = "Present: #{@one_per_int_tally["Present"]}"
+          = "Present: #{@one_per_sen_tally["Present"]}"
     
-    <br />
-    %p  
+    %p.details
+      \- details -
+
+    %p.drop  
       Each state gets one vote and the rest are allocated by population. For states with an odd number of votes, give the extra (or only) vote to the senior senator. 
 
-= render "roll_call"
+%div.clear-container.three-em
+  &nbsp;
 
-%div.clear-container
+= render :partial => "roll_call"
 
-    
--#%div        
-  -#%p
-    -#= pp @vote.inspect
+%div.clear-container.two-em
+  &nbsp;
+
 
 :javascript
   $( document ).ready( function() { // still need mouse change on rollover for click on div events
 
-      var rollCall = function() {
+    var rollCall = function() {
 
-  		  var $rollCall = $( "div#roll-call li" );
-          var $traditionalVote = $( "div.traditional-vote" );
-          var $popularVote = $( "div.popular-vote" );
-          var $onePerFractionalVote = $( "div.fraction-vote" );
-          var $onePerIntVote = $( "div.int-vote" );
-          var voters = gon.voters;
+      var $rollCall = $( "div#roll-call" );
+      var $traditionalVote = $( "div#traditional-vote" );
+      var $popularVote = $( "div#popular-vote" );
+      var $fractionalVote = $( "div#fraction-vote" );
+      var $seniorityVote = $( "div#seniority-vote" );
 
-          var traditionalRollCall = function() {
-            for ( var i = 0; i < $rollCall.length; i += 1 ) {
-                  $rollCall[i].textContent = ( voters[i].last_name + ", " + voters[i].first_name );
-              };
-          };
+      var alternateRollCall = function(vote_type) {
+        switch (vote_type) {
+        case 'traditional':
+          $rollCall.html('#{escape_javascript( render 'roll_call', roll: 'traditional' )}');
+          break;
+        case 'popular':
+          $rollCall.html('#{escape_javascript( render 'roll_call', roll: 'popular' )}');
+          break;
+        case 'fractional':
+          $rollCall.html('#{escape_javascript( render 'roll_call', roll: 'traditional' )}');
+          break;
+        case 'seniority':
+          $rollCall.html('#{escape_javascript( render 'roll_call', roll: 'seniority' )}');
+          break;
+        };
+      };
 
-          var popularRollCall = function() {
-            for ( var i = 0; i < $rollCall.length; i += 1 ) {
-                  $rollCall[i].textContent = ( voters[i].last_name + ", " + voters[i].first_name + " - weight: " + gon.pop_votes[i] );
-              };
-          };
+      $popularVote.click( function() {
+        alternateRollCall('popular');
+      }); 
+      
+      $traditionalVote.click( function() {
+        alternateRollCall('traditional');
+      }); 
 
-          var onePerFractionalRollCall = function() {
-              for ( var i = 0; i < $rollCall.length; i += 1 ) {
-                  $rollCall[i].textContent = ( voters[i].last_name + ", " + voters[i].first_name + " - weight: " + gon.one_per_frac_votes[i] );
-              };
-          };
+      $fractionalVote.click( function() {
+        alternateRollCall('fractional');
+      }); 
 
-          var onePerIntRollCall = function() {
-              for ( var i = 0; i < $rollCall.length; i += 1 ) {
-                  $rollCall[i].textContent = ( voters[i].last_name + ", " + voters[i].first_name + " - weight: " + gon.one_per_int_votes[i] );
-              };
-          };
+      $seniorityVote.click( function() {
+        alternateRollCall('seniority');
+      }); 
 
-          $popularVote.click( function() {
-              popularRollCall();
-          }); 
-          
-          $traditionalVote.click( function() {
-              traditionalRollCall();
-          }); 
-
-          $onePerFractionalVote.click( function() {
-              onePerFractionalRollCall();
-          }); 
-
-          $onePerIntVote.click( function() {
-              onePerIntRollCall();
-          }); 
-
-      }();
+    }();
   });
