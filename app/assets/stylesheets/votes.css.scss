@@ -1,32 +1,94 @@
-  h4 {
-    text-align: center;
-  }
+h4 {
+  text-align: center;
+}
 
-  p {
+h5 {
+  margin-left: 2em;
+}
+
+p {
+  text-align: justify;
+}
+
+p.details {
+  text-align: center;
+}
+
+p.drop { 
+  position: relative;
+  padding: 1em;
+  margin: 0 0 0 -36%;
+  width: 150%;
+  background-color: #333333;
+  color: white;
+  opacity: 0;
+  z-index: 10;
+  -webkit-transition: opacity .5s ease .1s;
+     -moz-transition: opacity .5s ease .1s;
+      -ms-transition: opacity .5s ease .1s;
+       -o-transition: opacity .5s ease .1s;
+          transition: opacity .5s ease .1s;
+}
+
+p.details:hover ~ p {
+  opacity: 1;
+} 
+
+li {
+  list-style-type: none;
+  font-size: 1.1em;
+  line-height: 1.5em;
+}
+
+div.vote-box {
+    border-right: 1px solid;
+    padding: .8em 2em 1em 2em;
+    height: 10em;
+  }      
+
+div.vote-box-first {
+    border-right: 1px solid;
+    border-left: 1px solid; 
+    padding: .8em 2em 1em 2em;
+    height: 10em;
+}
+
+div#roll-call {
+  position: relative;
+  clear: both;
+  li {
     text-align: justify;
   }
-
-  li {
-    list-style-type: none;
-    font-size: 1.1em;
-    line-height: 1.5em;
+  h2 {
+    margin-left: 41%;
+    margin-right: auto;
+    width: 9em;
   }
+}
 
-  div.vote-box {
-      border-right: 1px solid;
-      padding: .8em 2em 1em 2em;
-      height: 10em;
-  }
+div.clear-container {
+  clear: both;
+}
 
-  div.vote-box-first {
-      border-right: 1px solid;
-      border-left: 1px solid; 
-      padding: .8em 2em 1em 2em;
-      height: 10em;
-  }
+div.clear-container.ten-em {
+  height: 2em;
+}
 
-  div#roll-call {
-    position: relative;
-    top: 10em;
-  }
+div.clear-container.three-em {
+  height: 3em;
+}
 
+.clearfix {
+   *zoom: 1;
+}
+
+.clearfix:before,
+.clearfix:after {
+   display: table;
+   content: " ";
+   line-height: 0;
+}
+
+.clearfix:after {
+   clear: both;
+}  
