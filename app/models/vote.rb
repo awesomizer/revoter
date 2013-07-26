@@ -10,6 +10,9 @@ class Vote < ActiveRecord::Base
 
   validates :roll_id, :presence => true, :uniqueness => true
 
+  def self.vote_positions
+    ["Yea", "Nay", "Present", "Not Voting"] 
+  end
 
   def self.fractional_vote voters, system, required
     votes = {}
