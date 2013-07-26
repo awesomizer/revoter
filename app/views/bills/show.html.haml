@@ -1,14 +1,35 @@
-%h4
-  "#{@bill.official_title}"
+.bill
+  %h2
+    = @bill.official_title
 
-%h5
-  Votes
-%ul
-  - @votes.each do |vote|
-    %li
-      = link_to("#{vote['question']} (#{vote['result']}, #{vote['breakdown']['total']['Yea']} - #{vote['breakdown']['total']['Nay']})", vote_path(vote), method: :get)
+  %p
+    = @bill.summary_short
 
-%p
-  = p @votes.inspect
+  %h3
+    - if !@votes.blank?
+      Votes
+    - else
+      No votes yet
 
+  %ul
+    - @votes.each do |vote|
+      %li
+        = link_to("#{vote['question']} (#{vote['result']}, #{vote['breakdown']['total']['Yea']} - #{vote['breakdown']['total']['Nay']})", vote_path(vote.id), method: :get, remote: true)
 
+:javascript
+  $( document ).ready( function() {
+
+    history.replaceState( {path: '#{bill_path(@bill)}'}, '', '#{bill_path(@bill)}' );
+    document.title = '#{@bill.official_title}';
+
+    var voteLinks = (function() {
+      
+      $('a').on( 'click', function(e) {
+        bodyAjax.ajaxLink( e.target );
+        var href = $( this ).attr( 'href' );
+        history.pushState( {path: href}, '', href );
+        return false;
+      });
+    })();
+  });
+  
