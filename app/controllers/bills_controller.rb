@@ -19,6 +19,8 @@ class BillsController < ApplicationController
   end
 
   def show
+    @bill = Bill.find(params[:id])
+    @votes = @bill.votes
   end
 
 
