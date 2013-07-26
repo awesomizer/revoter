@@ -1,128 +1,143 @@
-%h2 
-  = @vote.question
+.vote
+  %h2 
+    = @vote.question
 
-%h3
-  = @vote.bill.official_title
+  %h3
+    = link_to @vote.bill.official_title, bill_path(@vote.bill), remote: true
 
-%p
-  = @vote.bill.summary_short
+  %p
+    = @vote.bill.summary_short
 
-%h5
-  = "Required for Passage: #{@vote.required}"
+  %h5
+    = "Required for Passage: #{@vote.required}"
 
-%div.row-fluid
-  %div.span3.vote-box-first#traditional-vote
-    %h4
-      Traditional
+  %div.row-fluid
+    %div.span3
+      %div{ :class => ['vote-box', 'vote-box-first'], :id => ['traditional-box'] }
+        %h4
+          Traditional
 
-    %ul.traditional-vote-tally
-      %li
-        = "#{@vote.result}"
-      %li
-        = "Yea: #{@vote.breakdown["total"]["Yea"]}"
-      %li
-        = "Nay: #{@vote.breakdown["total"]["Nay"]}"
-      - if @vote.breakdown["total"]["Not Voting"] > 0
-        %li
-          = "Not Voting: #{@vote.breakdown["total"]["Not Voting"]}"
-      - if @vote.breakdown["total"]["Present"] > 0
-        %li
-          = "Present: #{@vote.breakdown["total"]["Present"]}"
+        %ul.vote-box.traditional-tally
+          %li
+            = "#{@vote.result}"
+          %li
+            = "Yea: #{@vote.breakdown["total"]["Yea"]}"
+          %li
+            = "Nay: #{@vote.breakdown["total"]["Nay"]}"
+          - if @vote.breakdown["total"]["Not Voting"] > 0
+            %li
+              = "Not Voting: #{@vote.breakdown["total"]["Not Voting"]}"
+          - if @vote.breakdown["total"]["Present"] > 0
+            %li
+              = "Present: #{@vote.breakdown["total"]["Present"]}"
+          
+      %p.details
+        \- details -
       
-    %p.details
-      \- details -
+      %p.drop
+        The current sytem, two votes per state.
+
+    %div.span3
+      %div{ :class => ['vote-box'], :id => ['popular-box'] }
+        %h4
+          Popular
+
+        %ul.vote-box.popular-tally
+          %li
+            = "#{@popular_tally["Result"]}"
+          %li
+            = "Yea: #{@popular_tally["Yea"]}"
+          %li
+            = "Nay: #{@popular_tally["Nay"]}"
+          - if @popular_tally["Not Voting"].to_f > 0
+            %li
+              = "Not Voting: #{@popular_tally["Not Voting"]}"
+          - if @popular_tally["Present"].to_f > 0
+            %li
+              = "Present: #{@popular_tally["Present"]}"
+
+      %p.details
+        \- details -
+
+      %p.drop
+        One person one vote for each American.
     
-    %p.drop
-      The current sytem, two votes per state.
+    %div.span3
+      %div{ :class => ['vote-box'], :id => ['fraction-box'] } 
+        %h4
+          1+ Fractional 
 
-  %div.span3.vote-box#popular-vote
-    %h4
-      Popular
+        %ul.vote-box.fractional-tally
+          %li
+            = "#{@fractional_tally["Result"]}"
+          %li
+            = "Yea: #{@fractional_tally["Yea"]}"
+          %li
+            = "Nay: #{@fractional_tally["Nay"]}"
+          - if @fractional_tally["Not Voting"].to_f > 0
+            %li
+              = "Not Voting: #{@fractional_tally["Not Voting"]}"
+          - if @fractional_tally["Present"].to_f > 0
+            %li
+              = "Present: #{@fractional_tally["Present"]}"
 
-    %ul.popular-vote-tally
-      %li
-        = "#{@popular_tally["Result"]}"
-      %li
-        = "Yea: #{@popular_tally["Yea"]}"
-      %li
-        = "Nay: #{@popular_tally["Nay"]}"
-      - if @popular_tally["Not Voting"].to_f > 0
-        %li
-          = "Not Voting: #{@popular_tally["Not Voting"]}"
-      - if @popular_tally["Present"].to_f > 0
-        %li
-          = "Present: #{@popular_tally["Present"]}"
+      %p.details
+        \- details -
+      
+      %p.drop
+        Each state gets one vote and the rest are allocated by population. Divide a state's votes evenly between senators.
 
-    %p.details
-      \- details -
+    %div.span3
+      %div{ :class => ['vote-box'], :id => ['seniority-box'] }
+        %h4
+          1+ Seniority
 
-    %p.drop
-      One person one vote for each American.
+        %ul.vote-box.seniority-tally
+          %li
+            = "#{@seniority_tally["Result"]}"
+          %li
+            = "Yea: #{@seniority_tally["Yea"]}"
+          %li
+            = "Nay: #{@seniority_tally["Nay"]}"
+          - if @seniority_tally["Not Voting"].to_f > 0 
+            %li
+              = "Not Voting: #{@seniority_tally["Not Voting"]}"
+          - if @seniority_tally["Present"].to_f > 0    
+            %li
+              = "Present: #{@seniority_tally["Present"]}"
+      
+      %p.details
+        \- details -
 
-  %div.span3.vote-box#fraction-vote
-    %h4
-      1+ Fractional 
+      %p.drop  
+        Each state gets one vote and the rest are allocated by population. For states with an odd number of votes, give the extra (or only) vote to the senior senator. 
 
-    %ul.faction-vote-tally
-      %li
-        = "#{@fractional_tally["Result"]}"
-      %li
-        = "Yea: #{@fractional_tally["Yea"]}"
-      %li
-        = "Nay: #{@fractional_tally["Nay"]}"
-      - if @fractional_tally["Not Voting"].to_f > 0
-        %li
-          = "Not Voting: #{@fractional_tally["Not Voting"]}"
-      - if @fractional_tally["Present"].to_f > 0
-        %li
-          = "Present: #{@fractional_tally["Present"]}"
-
-    %p.details
-      \- details -
-    
-    %p.drop
-      Each state gets one vote and the rest are allocated by population. Divide a state's votes evenly between senators.
-
-  %div.span3.vote-box#seniority-vote
-    %h4
-      1+ Seniority
-
-    %ul.seniority-vote-tally
-      %li
-        = "#{@seniority_tally["Result"]}"
-      %li
-        = "Yea: #{@seniority_tally["Yea"]}"
-      %li
-        = "Nay: #{@seniority_tally["Nay"]}"
-      - if @seniority_tally["Not Voting"].to_f > 0 
-        %li
-          = "Not Voting: #{@seniority_tally["Not Voting"]}"
-      - if @seniority_tally["Present"].to_f > 0    
-        %li
-          = "Present: #{@seniority_tally["Present"]}"
-    
-    %p.details
-      \- details -
-
-    %p.drop  
-      Each state gets one vote and the rest are allocated by population. For states with an odd number of votes, give the extra (or only) vote to the senior senator. 
-
-%div.section-clear
-  &nbsp;
-  
-= render :partial => "roll_call"
+  %div#roll-call-partial
+    = render :partial => "roll_call"
 
 
 :javascript
-  $( document ).ready( function() { // still need mouse change on rollover for click on div events
+  $( document ).ready( function() {
 
-    var rollCall = function() {
+    document.title = '#{@vote.question}';
 
-      var $rollCall = $( "div#roll-call" );
-      var $traditionalVote = $( "div#traditional-vote" );
-      var $popularVote = $( "div#popular-vote" );
-      var $fractionalVote = $( "div#fraction-vote" );
-      var $seniorityVote = $( "div#seniority-vote" );
+    var billLink = (function() {
+
+      $( 'a' ).on( 'click', function( e ) {
+        bodyAjax.ajaxLink( e.target );
+        history.pushState({path: '#{bill_path(@vote.bill)}'}, '', '#{bill_path(@vote.bill)}');
+        return false;
+      });
+    })();  
+
+    var rollCall = (function() {
+
+      var $rollCall = $( "div#roll-call-partial" );
+      console.log($rollCall)
+      var $traditionalVote = $( "div#traditional-box" );
+      var $popularVote = $( "div#popular-box" );
+      var $fractionalVote = $( "div#fraction-box" );
+      var $seniorityVote = $( "div#seniority-box" );
 
       var alternateRollCall = function(vote_type) {
         switch (vote_type) {
@@ -156,6 +171,5 @@
       $seniorityVote.click( function() {
         alternateRollCall('seniority');
       }); 
-
-    }();
+    })();
   });
