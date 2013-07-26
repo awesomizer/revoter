@@ -1,11 +1,11 @@
-%h3 
+%h2 
   Real Democarcy in the Senate
 %p 
   The US Senate is undermining our democracy. One import way this is happening is through the enormous power given to a handful of sparsly populated states.  Because each states gets the same number of Senators, people in larger states can have much less power in the federal government then those from smaller states. This compromise might have made sense at our nation's founding, when the largest state had X times the population of the smallest state. Today that spread is about 70-1.
 %p 
   To see how votes in the Senate would change if we had representation based on population, fill in the information below to find a bill you're interested in. From there, select a vote and see how more equal representation would change what gets voted into law.
 
-%h3 
+%h3#button
   Find a Bill
 
 = form_tag({:controller => :bills, :action => :find}, :method => :get) do
@@ -17,4 +17,30 @@
   = text_field_tag :bill_number
   = hidden_field_tag :congress, "113"
   <br />
-  = submit_tag "Find Bill"
+  = submit_tag "Find Bill", :id => 'submit-button'
+
+:javascript
+  $( document ).ready( function() {
+
+    history.replaceState({path: '/'}, '', '/');
+
+    var formSubmit = (function() {
+
+      var sendGet = function() {
+        var billType = $( 'input:radio[name=bill_type]:checked' ).val();
+        var billNumber = $( '#bill_number' ).val();
+        var congress = $( '#congress' ).val();
+
+        $.get( '#{find_bill_url}', { bill_type: billType, bill_number: billNumber, congress: congress })
+        .success( function( result ) {
+            bodyAjax.switchBody( result );
+        })
+      };
+
+      $( '#submit-button' ).click( function( event ) {
+        event.preventDefault();
+        sendGet();
+        history.pushState({path: '/bills'}, '', '/bills');
+      });
+    })();
+  });
