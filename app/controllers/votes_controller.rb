@@ -15,4 +15,9 @@ class VotesController < ApplicationController
     end                      
   end
 
+  def find
+    vote = Vote.get_votes([params[:vote]["roll_id"]])
+    redirect_to vote_path( {id: vote[0].id} )
+  end
+
 end
