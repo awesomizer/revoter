@@ -26,7 +26,7 @@
             = "Nay: #{@vote.breakdown["total"]["Nay"]}"
           - if @vote.breakdown["total"]["Not Voting"] > 0
             %li
-              = "Not Voting: #{@vote.breakdown["total"]["Not Voting"]}"
+              = "No Vote: #{@vote.breakdown["total"]["Not Voting"]}"
           - if @vote.breakdown["total"]["Present"] > 0
             %li
               = "Present: #{@vote.breakdown["total"]["Present"]}"
@@ -51,7 +51,7 @@
             = "Nay: #{@popular_tally["Nay"]}"
           - if @popular_tally["Not Voting"].to_f > 0
             %li
-              = "Not Voting: #{@popular_tally["Not Voting"]}"
+              = "No Vote: #{@popular_tally["Not Voting"]}"
           - if @popular_tally["Present"].to_f > 0
             %li
               = "Present: #{@popular_tally["Present"]}"
@@ -76,7 +76,7 @@
             = "Nay: #{@fractional_tally["Nay"]}"
           - if @fractional_tally["Not Voting"].to_f > 0
             %li
-              = "Not Voting: #{@fractional_tally["Not Voting"]}"
+              = "No Vote: #{@fractional_tally["Not Voting"]}"
           - if @fractional_tally["Present"].to_f > 0
             %li
               = "Present: #{@fractional_tally["Present"]}"
@@ -101,7 +101,7 @@
             = "Nay: #{@seniority_tally["Nay"]}"
           - if @seniority_tally["Not Voting"].to_f > 0 
             %li
-              = "Not Voting: #{@seniority_tally["Not Voting"]}"
+              = "No Vote: #{@seniority_tally["Not Voting"]}"
           - if @seniority_tally["Present"].to_f > 0    
             %li
               = "Present: #{@seniority_tally["Present"]}"
