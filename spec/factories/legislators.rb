@@ -1,4 +1,4 @@
-FactoryGirl.describe do
+FactoryGirl.define do
   factory :legislator do
     id 1
     bioguide_id 'A000'
