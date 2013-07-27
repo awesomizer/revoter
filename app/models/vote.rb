@@ -10,6 +10,40 @@ class Vote < ActiveRecord::Base
 
   validates :roll_id, :presence => true, :uniqueness => true
 
+  def self.get_votes roll_id_array
+    votes = []
+    roll_id_array.each do |id|
+      vote = self.find_or_initialize_by_roll_id(id)
+      if vote.new_record?
+        vote = self.create_vote(vote, id)
+      end
+      votes << vote
+    end
+    votes
+  end
+
+  def self.get_recent_votes chamber #need to finish this
+    api = CongressApi.new
+    recent_votes = api.get_recent_votes(chamber) 
+  end
+
+  def self.create_vote vote, roll_id
+    api = CongressApi.new
+    results = api.get_vote(roll_id)
+    results = results["results"][0]
+    vote.roll_id = results["roll_id"]
+    vote.question = results["question"] 
+    vote.required = results["required"] 
+    vote.result = results["result"] 
+    vote.vote_type = results["vote_type"]
+    vote.breakdown = results["breakdown"]
+    vote.voters = results["voters"]
+    bill = Bill.get_bills([results["bill"]["bill_id"]])
+    vote.bill_id = bill[0].id
+    vote.save
+    return vote
+  end
+
   def self.vote_positions
     ["Yea", "Nay", "Present", "Not Voting"] 
   end
@@ -53,6 +87,9 @@ class Vote < ActiveRecord::Base
     tally = vote_result(tally, required)
     return votes, tally
   end
+
+
+private
 
   def self.int_weight_calculator vote, v
     if vote == 1
