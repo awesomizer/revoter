@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @users = User.all
+    @recent_votes = Vote.get_recent_votes('senate')
   end
 end
