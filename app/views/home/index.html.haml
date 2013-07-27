@@ -1,23 +1,45 @@
-%h2 
-  Real Democarcy in the Senate
-%p 
-  The US Senate is undermining our democracy. One import way this is happening is through the enormous power given to a handful of sparsly populated states.  Because each states gets the same number of Senators, people in larger states can have much less power in the federal government then those from smaller states. This compromise might have made sense at our nation's founding, when the largest state had X times the population of the smallest state. Today that spread is about 70-1.
-%p 
-  To see how votes in the Senate would change if we had representation based on population, fill in the information below to find a bill you're interested in. From there, select a vote and see how more equal representation would change what gets voted into law.
-
-%h3#button
-  Find a Bill
-
-= form_tag({:controller => :bills, :action => :find}, :method => :get) do
-  = radio_button_tag :bill_type, "s", {:checked => true}
-  = label_tag "Senate Bill"
-  = radio_button_tag :bill_type, "sres"
-  = label_tag "Senate Resolution"
-  = label_tag "Bill Number"
-  = text_field_tag :bill_number
-  = hidden_field_tag :congress, "113"
+.home
+  %h1 
+    reVoter
+    
+  %h2
+    \:reImagine the US Senate
+  %p 
+    The US Senate is undermining our democracy. One import way this is happening is through the enormous power given to a handful of sparsly populated states.  Because each states gets the same number of Senators, people in larger states can have much less power in the federal government then those from smaller states. This compromise might have made sense at our nation's founding, when the largest state (Virginia) had just over ten times the population of the smallest state (Kentucky). Today that spread is about 70-1.
+  %p 
+    To see how votes in the Senate would change if we had representation based on population, fill in the information below to find a bill you're interested in. From there, select a vote and see how more equal representation would change what gets voted into law.
   <br />
-  = submit_tag "Find Bill", :id => 'submit-button'
+
+  %h2.center
+    Find a Bill
+
+  = form_tag({:controller => :bills, :action => :find}, :method => :get) do
+    = radio_button_tag :bill_type, "s", {:checked => true}
+    = label_tag "Senate Bill"
+    &nbsp;
+    = radio_button_tag :bill_type, "sres"
+    = label_tag "Senate Resolution"
+    <br />
+
+    = label_tag "Congress"
+    = select_tag :congress, options_for_select(CONGRESSES, 113)
+    <br />
+
+    = label_tag "Number"
+    = text_field_tag :bill_number
+    <br />
+    <br />
+    
+    = submit_tag "Get It!", :id => 'submit-button'
+  <br />
+
+  %h3
+    Recent Senate Votes
+
+  %ul
+    - @recent_votes.each do |v|
+      %li
+        = link_to v["question"], find_vote_path({vote: v})
 
 :javascript
   $( document ).ready( function() {
@@ -40,7 +62,7 @@
       $( '#submit-button' ).click( function( event ) {
         event.preventDefault();
         sendGet();
-        history.pushState({path: '/bills'}, '', '/bills');
+        history.pushState({path: '/'}, '', '/');
       });
     })();
   });
