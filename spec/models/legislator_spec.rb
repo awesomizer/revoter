@@ -6,10 +6,10 @@ describe Legislator do
   it {should validate_presence_of(:bioguide_id)}
   it {should validate_uniqueness_of(:bioguide_id)}
 
-  context 'GET#create_or_update' do
+  context 'GET #create_or_update' do
 
     it 'should create legislators if they dont exist' do
-      legislator = Legislator.create_or_update(:legislator, id: 2))
+      legislator = Legislator.create_or_update(:legislator, id: 2)
       expect legislator.id.to eq(2) 
     end
 
