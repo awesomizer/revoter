@@ -6,31 +6,35 @@
 
   %div.row-fluid
     %div.span6
-      %h4
+      %h3
         Democrats
 
       - @vote_types.each do |type|
         - if vote_present? "D", type
-          %h5 
+          %h4.type 
             = type
+          %h5.weight
+            weight
 
           %table
             - list = roll_call_list "D", type, roll
             - list.each do |item, weight|
               %tr
-                %td
+                %td.legislator
                   = item
                 %td.weight
                   = weight
 
-    %div.span6
-      %h4
+    %div{:class => ['span6', 'right-column']}
+      %h3
         Republicans
 
       - @vote_types.each do |type|
         - if vote_present? "R", type
-          %h5.indent 
+          %h4{:class => ['type', 'indent']} 
             = type
+          %h5.weight
+            weight
 
           %table.right-column
             - list = roll_call_list "R", type, roll
@@ -42,13 +46,15 @@
                   = weight
       <br />
 
-      %h4
+      %h3
         Independents
 
       - @vote_types.each do |type|
         - if vote_present? "I", type
-          %h5.indent 
+          %h4{:class => ['type', 'indent']} 
             = type
+          %h5.weight
+            weight
 
           %table.right-column
             - list = roll_call_list "I", type, roll
