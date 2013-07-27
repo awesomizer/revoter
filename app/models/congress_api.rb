@@ -17,8 +17,19 @@ class CongressApi
     options = {query: 
                {apikey: ENV["SUNLIGHT_KEY"], 
                 roll_id: roll_id, 
-                fields: 'roll_id,vote_type,question,required,breakdown,voter_ids,voters,result'}}
+                fields: 'roll_id,bill,vote_type,question,required,breakdown,voter_ids,voters,result'}}
       self.class.get('/votes', options).parsed_response
+  end
+
+  def get_recent_votes chamber
+    options = {query: 
+               {apikey: ENV["SUNLIGHT_KEY"], 
+                chamber: "#{chamber}",
+                congress: '113',
+                order: 'voted_at',
+                fields: 'question,result,roll_id'}}
+      response = self.class.get('/votes', options).parsed_response
+      short_list = response["results"][0..4]
   end
 
   def get_legislator bioguide_id
