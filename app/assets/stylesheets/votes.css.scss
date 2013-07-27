@@ -1,13 +1,9 @@
-.vote h4 {
-  text-align: center;
-}
-
 // Vote boxes
 
 div.vote-box {
     border-right: 1px solid;
     padding: .3em 2em 1em 2em;
-    height: 8em;
+    height: auto;
     cursor: pointer;
     -webkit-transition: background-color .5s, color .5s, ease .1s;
     -moz-transition: background-color .5s, color .5s, ease .1s;
@@ -15,9 +11,11 @@ div.vote-box {
     -o-transition: background-color .5s, color .5s, ease .1s;
     transition: background-color .5s, color .5s, ease .1s;
       li {
+        position: relative;
+        left: -1em;
         list-style-type: none;
+        width: 100%;
         display: inline-block;
-        padding: 0 1.5em 0 0;
       }
 }
 
@@ -80,6 +78,18 @@ div#roll-call {
     }
 }
 
+.vote .roll-call h3 {
+  text-align: center;
+}
+
+h4.type {
+  float: left;
+}
+
+h5.weight {
+  float: right;
+}
+
 .vote table {
   width: 100%;
 }
@@ -87,12 +97,19 @@ div#roll-call {
 .vote td {
   font-size: 1.1em;
   line-height: 1.5em;
-  padding: 0 0 0 0;
-  min-width: 2.5em;
+  padding: 0 1em 0 0;
+  width: auto;
 }
 
-.vote table.right-column {
+h5.weight {
+  padding: 0 1.5em 0 0;
+}
+
+.vote .right-column {
   td.legislator {
+    padding: 0 0 0 1em;
+  }
+  h4.type {
     padding: 0 0 0 1em;
   }
 }
