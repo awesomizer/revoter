@@ -30,15 +30,15 @@ module VotesHelper
   def roll_call_item legislator, *roll
     case roll[0][0]
     when 'traditional'
-      ["#{legislator.last_name}, #{legislator.first_name} - #{legislator.state_name} / #{legislator.state_rank}", 1]
+      ["#{legislator.last_name}, #{legislator.first_name} - #{legislator.state_name}", 1]
     when 'popular'
-      ["#{legislator.last_name}, #{legislator.first_name} - #{legislator.state_name} / #{legislator.state_rank}", @popular_votes[legislator.bioguide_id]]
+      ["#{legislator.last_name}, #{legislator.first_name} - #{legislator.state_name}", @popular_votes[legislator.bioguide_id]]
     when 'fractional'
-      ["#{legislator.last_name}, #{legislator.first_name} - #{legislator.state_name} / #{legislator.state_rank}", @fractional_votes[legislator.bioguide_id]]
+      ["#{legislator.last_name}, #{legislator.first_name} - #{legislator.state_name}", @fractional_votes[legislator.bioguide_id]]
     when 'seniority'
-      ["#{legislator.last_name}, #{legislator.first_name} - #{legislator.state_name} / #{legislator.state_rank}", @seniority_votes[legislator.bioguide_id]]
+      ["#{legislator.last_name}, #{legislator.first_name} - #{legislator.state_name}", @seniority_votes[legislator.bioguide_id]]
     else
-      ["#{legislator.last_name}, #{legislator.first_name} - #{legislator.state_name} / #{legislator.state_rank}", " "]
+      ["#{legislator.last_name}, #{legislator.first_name} - #{legislator.state_name}", 1]
     end
   end
 
