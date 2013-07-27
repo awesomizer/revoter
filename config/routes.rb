@@ -14,4 +14,5 @@ Votevote::Application.routes.draw do
   get '/bill', to: 'bills#find', as: :find_bill
   get '/bills/:id', to: 'bills#show', as: :bill
   get '/votes/:id', to: 'votes#show', as: :vote
+  get '/vote', to: 'votes#find', as: :find_vote
 end
