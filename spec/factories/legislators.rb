@@ -10,6 +10,8 @@ FactoryGirl.define do
     first_name 'Sen'
     last_name 'Ator'
     party 'D'
+    updated_at '2013-07-23 00:41:06.150001'
+    state
   end
 end
 
