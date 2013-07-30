@@ -44,7 +44,6 @@
   $( document ).ready( function() {
 
     history.replaceState( {path: '#{bill_path(@bill)}'}, '', '#{bill_path(@bill)}' );
-    console.log('replaceState billpath');
     document.title = ('#{@bill.official_title}');
 
     var voteLinks = (function() {
@@ -53,7 +52,6 @@
         bodyAjax.ajaxLink( e.target );
         var href = $( this ).attr( 'href' );
         history.pushState( {path: href}, '', href );
-        console.log('pushState votepath');
         return false
       });
     })();
