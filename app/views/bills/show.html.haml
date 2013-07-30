@@ -17,10 +17,35 @@
         = link_to("#{vote['question']} (#{vote['result']}, #{vote['breakdown']['total']['Yea']} - #{vote['breakdown']['total']['Nay']})", vote_path(vote.id), method: :get, remote: true)
 
 :javascript
+
+  var bodyAjax = (function() {
+
+      var ajaxLink = function( element ) {
+              $link = $( element );
+              href = $link.attr( 'href' );
+              $.get( href )
+              .success( function( result ) {
+                  bodyAjax.switchBody( result );
+              });
+      };  
+
+      var switchBody = function( result ) { 
+              newBody = $.parseHTML( result, document, true );
+              oldBody = $( 'body' );
+              oldBody.html( newBody );
+      };
+
+      return {
+          ajaxLink: ajaxLink,
+          switchBody: switchBody
+      };
+  })();
+
   $( document ).ready( function() {
 
     history.replaceState( {path: '#{bill_path(@bill)}'}, '', '#{bill_path(@bill)}' );
-    document.title = '#{@bill.official_title}';
+    console.log('replaceState billpath');
+    document.title = ('#{@bill.official_title}');
 
     var voteLinks = (function() {
       
@@ -28,7 +53,8 @@
         bodyAjax.ajaxLink( e.target );
         var href = $( this ).attr( 'href' );
         history.pushState( {path: href}, '', href );
-        return false;
+        console.log('pushState votepath');
+        return false
       });
     })();
   });
