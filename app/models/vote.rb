@@ -15,14 +15,14 @@ class Vote < ActiveRecord::Base
     roll_id_array.each do |id|
       vote = self.find_or_initialize_by_roll_id(id)
       if vote.new_record?
-        vote = self.create_vote(vote, id)
+        vote = self.create_vote(vote, id) # refactor this method to pass a list of votes to create votes and only hit the api once
       end
       votes << vote
     end
     votes
   end
 
-  def self.get_recent_votes chamber #need to finish this
+  def self.get_recent_votes chamber
     api = CongressApi.new
     recent_votes = api.get_recent_votes(chamber) 
   end
@@ -43,14 +43,7 @@ class Vote < ActiveRecord::Base
       tally[v["vote"]] += weight 
     end
 
-    tally.each do |t, n|
-      if tally[t].is_a? Float
-        tally[t] = sprintf('%.2f', n)
-        tally[t].gsub!(/^0+/, "")
-        tally[t].gsub!(/0$/, "")
-      end
-    end
-    
+    tally = tally_formatter tally
     tally = vote_result(tally, required)
     return votes, tally
   end
@@ -73,7 +66,6 @@ class Vote < ActiveRecord::Base
 
 
 private
-
 
   def self.create_vote vote, roll_id
     api = CongressApi.new
@@ -116,6 +108,17 @@ private
     else
       vote = (vote - 1) / 2
     end
+  end
+
+  def self.tally_formatter tally
+    tally.each do |t, n|
+      if tally[t].is_a? Float
+        tally[t] = sprintf('%.2f', n)
+        tally[t].gsub!(/^0+/, "")
+        tally[t].gsub!(/0$/, "")
+      end
+    end
+    tally
   end
 
   def self.vote_result tally, required
