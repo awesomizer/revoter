@@ -39,16 +39,40 @@
   %ul
     - @recent_votes.each do |v|
       %li
-        = link_to v["question"], find_vote_path({vote: v})
+        = link_to v["question"], find_vote_path({roll_id: v["roll_id"]})
 
 :javascript
+
+  var bodyAjax = (function() {
+
+      var ajaxLink = function( element ) {
+              $link = $( element );
+              href = $link.attr( 'href' );
+              $.get( href ).success( function( result ) {
+                  bodyAjax.switchBody( result );
+              });
+      };  
+
+      var switchBody = function( result ) { 
+              newBody = $.parseHTML( result, document, true );
+              oldBody = $( 'body' );
+              oldBody.html( newBody );
+      };
+
+      return {
+          ajaxLink: ajaxLink,
+          switchBody: switchBody
+      };
+  })();
+
   $( document ).ready( function() {
 
     history.replaceState({path: '/'}, '', '/');
+    console.log('replaceState home /');
 
-    var formSubmit = (function() {
+    var ajax = (function() {
 
-      var sendGet = function() {
+      var formSubmit = function() {
         var billType = $( 'input:radio[name=bill_type]:checked' ).val();
         var billNumber = $( '#bill_number' ).val();
         var congress = $( '#congress' ).val();
@@ -56,13 +80,14 @@
         $.get( '#{find_bill_url}', { bill_type: billType, bill_number: billNumber, congress: congress })
         .success( function( result ) {
             bodyAjax.switchBody( result );
-        })
+        });
       };
 
       $( '#submit-button' ).click( function( event ) {
         event.preventDefault();
-        sendGet();
+        formSubmit();
         history.pushState({path: '/'}, '', '/');
+        console.log('pushState home /');
       });
     })();
   });
