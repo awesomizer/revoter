@@ -27,9 +27,15 @@ class CongressApi
                 chamber: "#{chamber}",
                 congress: '113',
                 order: 'voted_at',
-                fields: 'question,result,roll_id'}}
+                fields: 'question,result,roll_id,bill'}}
       response = self.class.get('/votes', options).parsed_response
-      short_list = response["results"][0..4]
+      short_list = []
+      response["results"][0..9].each do |vote|
+        if vote["bill"]
+          short_list << vote
+        end
+      end
+      short_list
   end
 
   def get_legislator bioguide_id
