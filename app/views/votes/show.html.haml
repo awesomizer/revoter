@@ -116,7 +116,30 @@
     = render :partial => "roll_call"
 
 
-:javascript
+:javascript 
+
+  var bodyAjax = (function() {
+
+      var ajaxLink = function( element ) {
+              $link = $( element );
+              href = $link.attr( 'href' );
+              $.get( href ).success( function( result ) {
+                  bodyAjax.switchBody( result );
+              });
+      };  
+
+      var switchBody = function( result ) { 
+              newBody = $.parseHTML( result, document, true );
+              oldBody = $( 'body' );
+              oldBody.html( newBody );
+      };
+
+      return {
+          ajaxLink: ajaxLink,
+          switchBody: switchBody
+      };
+  })();
+  
   $( document ).ready( function() {
 
     document.title = '#{@vote.question}';
@@ -126,14 +149,14 @@
       $( 'a' ).on( 'click', function( e ) {
         bodyAjax.ajaxLink( e.target );
         history.pushState({path: '#{bill_path(@vote.bill)}'}, '', '#{bill_path(@vote.bill)}');
-        return false;
+        console.log('pushState billpath');
+        return false
       });
     })();  
 
     var rollCall = (function() {
 
       var $rollCall = $( "div#roll-call-partial" );
-      console.log($rollCall)
       var $traditionalVote = $( "div#traditional-box" );
       var $popularVote = $( "div#popular-box" );
       var $fractionalVote = $( "div#fraction-box" );
