@@ -34,5 +34,11 @@ set :use_sudo, false
 set :keep_releases, 5
 # set :scm_passphrase, "p@ssw0rd"  
 
-after "deploy:update_code", "deploy:migrate"
+namespace :db do
+  task :db_config, :except => { :no_release => true }, :role => :app do
+    run "cp -f ~/database.yml #{deploy_to}/config/database.yml"
+  end
+end
+
+after "deploy:finalize_update", "db:db_config" 
 after "deploy:restart", "deploy:cleanup"
