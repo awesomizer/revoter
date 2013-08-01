@@ -10,6 +10,7 @@ gem "simple_form",    ">= 2.1.0"
 gem "figaro",         ">= 0.6.3"
 gem 'jquery-rails'
 gem 'httparty',       ">= 0.10.1"
+gem 'rake',           ">= 10.0.4"
 
 group :assets do
   gem 'coffee-rails',   '~> 3.2.1'
@@ -24,6 +25,8 @@ group :development do
   gem "quiet_assets",       ">= 1.0.2"
   gem "better_errors",      ">= 0.7.2"
   gem "binding_of_caller",  ">= 0.7.1", :platforms => [:mri_19, :mri_20, :rbx]
+  gem "capistrano",         ">= 2.15.5"
+  gem "rvm-capistrano"
 end
 
 group :development, :test do
