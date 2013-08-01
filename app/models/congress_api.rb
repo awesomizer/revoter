@@ -30,7 +30,7 @@ class CongressApi
                 fields: 'question,result,roll_id,bill'}}
       response = self.class.get('/votes', options).parsed_response
       short_list = []
-      response["results"][0..9].each do |vote|
+      response["results"][0..14].each do |vote|
         if vote["bill"]
           short_list << vote
         end
