@@ -1,6 +1,14 @@
 require "bundler/capistrano"
 # set :bundle_flags, "--deployment"
 
+set :default_environment, {
+  'PATH' => "/home/christian/.rvm/bin:/home/christian/.rvm/gems/ruby-2.0.0-p0/bin:$PATH",
+  'RUBY_VERSION' => 'ruby 2.0.0-p0',
+  'GEM_HOME'     => '/home/christian/.rvm/gems/ruby-2.0.0-p0',
+  'GEM_PATH'     => '/home/christian/.rvm/gems/ruby-2.0.0-p0',
+  'BUNDLE_PATH'  => '/home/christian/.rvm/gems/ruby-2.0.0-p0'  # If you are using bundler.
+}
+
 load 'deploy/assets'
 
 set :application, "revoter.us"
@@ -35,8 +43,8 @@ default_run_options[:pty] = true  # Must be set for the password prompt
 set :user, "christian"  # The server's user for deploys
 set :use_sudo, false
 set :keep_releases, 5
-set :scm_username, "" # insert these just before running tasks on server, then delete
-set :scm_passphrase, ""  # insert these just before running tasks on server, then delete
+set :scm_username, "awesomizer" # insert these just before running tasks on server, then delete
+set :scm_passphrase, "CfAis333"  # insert these just before running tasks on server, then delete
 # Capistrano::CLI.password_prompt " => "
 
 # this copies in the app's config files that contain sensitive data
