@@ -11,6 +11,7 @@ gem "figaro",         ">= 0.6.3"
 gem 'jquery-rails'
 gem 'httparty',       ">= 0.10.1"
 gem 'rake',           ">= 10.1.0"
+gem "therubyracer",   :require => 'v8'
 
 group :assets do
   gem 'coffee-rails',   '~> 3.2.1'
