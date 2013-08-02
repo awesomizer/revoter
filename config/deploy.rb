@@ -1,5 +1,6 @@
 require "bundler/capistrano"
 # set :bundle_flags, "--deployment"
+require 'puma/capistrano'
 
 set :default_environment, {
   'PATH' => "/home/christian/.rvm/bin:/home/christian/.rvm/gems/ruby-2.0.0-p0/bin:$PATH",
