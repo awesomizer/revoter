@@ -1,10 +1,10 @@
-# require "bundler/capistrano" - having problems with missing /shared/bundle path
-require "rvm/capistrano"
+require "bundler/capistrano"
+# require "rvm/capistrano"
 
-set :rvm_ruby_string, :local        # use the same ruby as used locally for deployment
+# set :rvm_ruby_string, :local        # use the same ruby as used locally for deployment
 
-before 'deploy', 'rvm:install_rvm'  # update RVM
-before 'deploy', 'rvm:install_ruby'
+# before 'deploy', 'rvm:install_rvm'  # update RVM
+# before 'deploy', 'rvm:install_ruby'
 
 set :application, "revoter.us"
 set :repository,  "https://github.com/awesomizer/revoter.git"
@@ -43,8 +43,8 @@ set :scm_passphrase, "githubpass"  # insert these just before running tasks on s
 # Capistrano::CLI.password_prompt " => "
 
 # rvm settings to stop bundle --deployment
-set :bundle_dir, ''
-set :bundle_flags, '--system --quiet'
+# set :bundle_dir, ''
+# set :bundle_flags, '--system --quiet'
 
 # this copies in the app's config files that contain sensitive data
 namespace :db do
