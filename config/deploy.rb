@@ -38,8 +38,8 @@ default_run_options[:pty] = true  # Must be set for the password prompt
 set :user, "christian"  # The server's user for deploys
 set :use_sudo, false
 set :keep_releases, 5
-set :scm_username, "githubname" # insert these just before running tasks on server, then delete
-set :scm_passphrase, "githubpass"  # insert these just before running tasks on server, then delete
+set :scm_username, "" # insert these just before running tasks on server, then delete
+set :scm_passphrase, ""  # insert these just before running tasks on server, then delete
 # Capistrano::CLI.password_prompt " => "
 
 # rvm settings to stop bundle --deployment
