@@ -47,12 +47,12 @@ set :scm_passphrase, "githubpass"  # insert these just before running tasks on s
 # set :bundle_flags, '--system --quiet'
 
 # this copies in the app's config files that contain sensitive data
-namespace :db do
-  task :db_config, :except => { :no_release => true }, :role => :app do
+namespace :config do
+  task :configs, :except => { :no_release => true }, :role => :app do
     run "cp -f ~/privates/database.yml #{release_path}/config/database.yml"
     run "cp -f ~/privates/application.yml #{release_path}/config/application.yml"
   end
 end
 
-after "deploy:finalize_update", "db:db_config" 
+after "deploy:finalize_update", "config:configs" 
 after "deploy:restart", "deploy:cleanup"
