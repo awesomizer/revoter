@@ -16,6 +16,7 @@ development:
   adapter: postgresql
   encoding: UTF8 
   database: 
+  localhost: localhost (or address of db server if separate from app)
   pool: 5
   username: 
   password: 
