@@ -49,8 +49,8 @@ set :scm_passphrase, ""  # insert these just before running tasks on server, the
 # this copies in the app's config files that contain sensitive data
 namespace :config do
   task :configs, :except => { :no_release => true }, :role => :app do
-    run "cp -f ~/privates/database.yml #{release_path}/config/database.yml"
-    run "cp -f ~/privates/application.yml #{release_path}/config/application.yml"
+    run "cp -f ~/revoter.us/privates/database.yml #{release_path}/config/database.yml"
+    run "cp -f ~/revoter.us/privates/application.yml #{release_path}/config/application.yml"
   end
 end
 
