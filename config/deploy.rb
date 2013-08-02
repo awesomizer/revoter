@@ -1,7 +1,7 @@
 require "bundler/capistrano"
+# set :bundle_flags, "--deployment"
 
 load 'deploy/assets'
-
 
 set :application, "revoter.us"
 set :repository,  "https://github.com/awesomizer/revoter.git"
