@@ -1,4 +1,3 @@
-require 'debugger'
 class Legislator < ActiveRecord::Base
 
   attr_accessible :bioguide_id,
