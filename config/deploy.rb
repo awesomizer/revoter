@@ -1,11 +1,11 @@
 require "bundler/capistrano"
 
 set :default_environment, {
-#  'PATH' => "/home/christian/.rvm/bin:/home/christian/.rvm/gems/ruby-2.0.0-p0/bin:$PATH",
+  'PATH' => "/home/christian/revoter.us/public/shared/bundle/ruby/2.0.0/bin:/home/christian/.rbenv/versions/2.0.0-p0/bin:$PATH",
   'RUBY_VERSION' => '2.0.0-p0',
-#  'GEM_HOME'     => '/home/christian/.rvm/gems/ruby-2.0.0-p0',
-#  'GEM_PATH'     => '/home/christian/.rvm/gems/ruby-2.0.0-p0',
-#  'BUNDLE_PATH'  => '/home/christian/.rvm/gems/ruby-2.0.0-p0'  # If you are using bundler.
+  'GEM_HOME'     => '/home/christian/revoter.us/public/shared/bundle/ruby/2.0.0',
+  'GEM_PATH'     => '/home/christian/revoter.us/public/shared/bundle/ruby/2.0.0',
+  'BUNDLE_PATH'  => '/home/christian/revoter.us/public/shared/bundle/ruby/2.0.0'  # If you are using bundler.
 }
 
 load 'deploy/assets'
