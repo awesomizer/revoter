@@ -256,6 +256,7 @@ DEPENDENCIES
   better_errors (>= 0.7.2)
   binding_of_caller (>= 0.7.1)
   bootstrap-sass (>= 2.3.1.1)
+  bundler
   cancan (>= 1.6.9)
   capistrano (>= 2.15.5)
   capybara (>= 2.0.3)
