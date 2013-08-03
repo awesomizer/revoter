@@ -12,7 +12,8 @@ gem 'jquery-rails'
 gem 'httparty',       ">= 0.10.1"
 gem 'rake',           ">= 10.1.0"
 gem "therubyracer",   :require => 'v8'
-gem 'puma',           '>=2.4.0'
+# gem 'puma',          '>= 2.4.0'
+gem 'thin',            '>= 1.5.1'
 
 group :assets do
   gem 'coffee-rails',   '~> 3.2.1'
