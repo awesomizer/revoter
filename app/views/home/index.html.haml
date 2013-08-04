@@ -85,14 +85,14 @@
 
       $( '#submit-button' ).click( function( event ) {
         event.preventDefault();
-        billNumberValidate();
+        billNumberFeedback();
         if ( billNumberElement[0].validity.valid === true ) {
           formSubmit();
           history.pushState( {path: '/'}, '', '/' );
         }
       });
 
-      var billNumberValidate = function() {
+      var billNumberFeedback = function() {
         
         if ( billNumberElement[0].validity.patternMismatch === true ) {
           billNumberElement[0].setCustomValidity( 'please feed me numbers :-)' );
