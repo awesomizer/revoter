@@ -12,8 +12,17 @@ module VotesHelper
     @vote.legislators.find_by_bioguide_id(voter["bioguide_id"])
   end
 
-#  def vote_weight legislator
-    
+  def short_result
+    case @vote.result
+    when /rejected/i
+      return 'Rejected'
+    when /passed/i
+      return 'Passed'
+    else
+      return 'Error'
+    end
+  end
+
   def roll_call_list party, position, *roll
     list = []
     @vote.voters.each_value do |v|
