@@ -29,3 +29,16 @@ input#bill_type_s,
 input#bill_type_sres {
   margin: 0 0 .3em 0;
 }
+
+::-webkit-input-placeholder {
+   color: blue;
+}
+:-moz-placeholder { /* Firefox 18- */
+   color: blue;  
+}
+::-moz-placeholder {  /* Firefox 19+ */
+   color: blue;  
+}
+:-ms-input-placeholder {  
+   color: blue;  
+}
