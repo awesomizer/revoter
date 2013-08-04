@@ -10,6 +10,7 @@ class Bill < ActiveRecord::Base
   has_many :votes
 
   validates_presence_of :sun_bill_id, :uniqueness => :true
+  validates_presence_of :official_title, :summary_short, :vote_list
 
   def self.get_bills sun_bill_id_array
     bill_list = []

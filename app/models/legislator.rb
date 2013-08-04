@@ -18,6 +18,7 @@ class Legislator < ActiveRecord::Base
   has_and_belongs_to_many :votes
 
   validates :bioguide_id, presence: true, uniqueness: true
+  validates_presence_of :state_code, :chamber, :first_name, :last_name, :party
   
   def self.create_or_update voter
     l = Legislator.find_or_initialize_by_bioguide_id(voter["bioguide_id"])
