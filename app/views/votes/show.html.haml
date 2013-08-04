@@ -8,8 +8,11 @@
   %p
     = @vote.bill.summary_short
 
-  %h5
+  %h5.bill-info-footer.left
     = "Required for Passage: #{@vote.required}"
+  
+  %h5.bill-info-footer.right
+    = "Result: #{@vote.result}"
 
   %div.row-fluid
     %div.span3

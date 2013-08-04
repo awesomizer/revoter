@@ -1,3 +1,20 @@
+// Vote description
+
+h5.bill-info-footer {
+  display: inline-block;
+  margin: 0 0 1em 0;
+}
+
+h5.bill-info-footer.left {
+  float: left;
+  width: 25%;
+}
+
+h5.bill-info-footer.right {
+  float: right;
+  width: 69%;
+}
+
 // Vote boxes
 
 div.vote-box {
