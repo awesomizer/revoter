@@ -28,7 +28,7 @@ div.vote-box:hover {
   color: #EEEEEE;
 }
 
-ul.vote-box {
+ul.vote-box, h4 {
   text-align: center
 }
 
@@ -68,7 +68,7 @@ div.section-clear {
 
 // Roll call table
 
-div#roll-call {
+div.roll-call {
   position: relative;
   top: -7em;
     h2 {
