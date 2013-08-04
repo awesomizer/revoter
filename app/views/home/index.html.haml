@@ -83,7 +83,9 @@
         })
         .fail( function( result ) {
           if (result.resultText =~ /NoMethodError at \/bill/)
-            alert( 'Sorry, we were unable to find a record with those parameters.' );
+            billNumberElement[0].setCustomValidity( "drats! no luck finding it :-/" );
+            billNumberElement.val( '' );
+            billNumberElement.attr( 'placeholder', "drats! no luck finding it :-/" );
         });
       };
 
