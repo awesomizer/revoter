@@ -39,7 +39,7 @@
   %ul
     - @recent_votes.each do |v|
       %li
-        = link_to v["question"], find_vote_path({roll_id: v["roll_id"]})
+        = link_to v["question"], find_vote_path( {roll_id: v["roll_id"]} )
 
 :javascript
 
@@ -67,9 +67,9 @@
 
   $( document ).ready( function() {
 
-    history.replaceState({path: '/'}, '', '/');
+    history.replaceState( {path: '/'}, '', '/' );
 
-    var ajax = (function() {
+    var ajax = ( function() {
       var billType = $( 'input:radio[name=bill_type]:checked' ).val();
       var billNumberValue = $( '#bill_number' ).val();
       var congress = $( '#congress' ).val();
@@ -77,7 +77,7 @@
 
       var formSubmit = function() {
 
-        $.get( '#{find_bill_url}', { bill_type: billType, bill_number: billNumberValue, congress: congress })
+        $.get( '#{find_bill_url}', { bill_type: billType, bill_number: billNumberValue, congress: congress } )
         .success( function( result ) {
             bodyAjax.switchBody( result );
         });
@@ -86,25 +86,25 @@
       $( '#submit-button' ).click( function( event ) {
         event.preventDefault();
         billNumberValidate();
-        if (billNumberElement[0].validity.valid === true) {
+        if ( billNumberElement[0].validity.valid === true ) {
           formSubmit();
-          history.pushState({path: '/'}, '', '/');
+          history.pushState( {path: '/'}, '', '/' );
         }
       });
 
       var billNumberValidate = function() {
         
         if ( billNumberElement[0].validity.patternMismatch === true ) {
-          billNumberElement[0].setCustomValidity('please feed me numbers :-)');
-          billNumberElement.val('');
-          billNumberElement.attr('placeholder', 'please feed me numbers :-)');
+          billNumberElement[0].setCustomValidity( 'please feed me numbers :-)' );
+          billNumberElement.val( '' );
+          billNumberElement.attr( 'placeholder', 'please feed me numbers :-)' );
           }
         else if ( billNumberElement[0].validity.valueMissing === true ) {
-          billNumberElement[0].setCustomValidity('I\'m hungry :-)');
-          billNumberElement.attr('placeholder', 'I\'m hungry :-)');
+          billNumberElement[0].setCustomValidity( 'I\'m hungry :-)' );
+          billNumberElement.attr( 'placeholder', 'I\'m hungry :-)' );
           }
         else 
-          billNumberElement[0].setCustomValidity('');
+          billNumberElement[0].setCustomValidity( '' );
       };
    })();
   });
