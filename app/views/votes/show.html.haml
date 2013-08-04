@@ -5,9 +5,6 @@
   %h3
     = link_to @vote.bill.official_title, bill_path(@vote.bill), remote: true
 
-  %p
-    = @vote.bill.summary_short
-
   %h5.bill-info-footer.left
     = "Required for Passage: #{@vote.required}"
   
