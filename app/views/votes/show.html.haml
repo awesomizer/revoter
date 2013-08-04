@@ -19,23 +19,17 @@
 
         %ul.vote-box.traditional-tally
           %li
-            = "#{@vote.result}"
+            = "#{short_result}"
           %li
             = "Yea: #{@vote.breakdown["total"]["Yea"]}"
           %li
             = "Nay: #{@vote.breakdown["total"]["Nay"]}"
-          - if @vote.breakdown["total"]["Not Voting"] > 0
-            %li
-              = "No Vote: #{@vote.breakdown["total"]["Not Voting"]}"
-          - if @vote.breakdown["total"]["Present"] > 0
-            %li
-              = "Present: #{@vote.breakdown["total"]["Present"]}"
           
       %p.details
         \- details -
       
       %p.drop
-        The current sytem, two votes per state.
+        The current system, two votes per state.
 
     %div.span3
       %div{ :class => ['vote-box'], :id => ['popular-box'] }
@@ -49,12 +43,6 @@
             = "Yea: #{@popular_tally["Yea"]}"
           %li
             = "Nay: #{@popular_tally["Nay"]}"
-          - if @popular_tally["Not Voting"].to_f > 0
-            %li
-              = "No Vote: #{@popular_tally["Not Voting"]}"
-          - if @popular_tally["Present"].to_f > 0
-            %li
-              = "Present: #{@popular_tally["Present"]}"
 
       %p.details
         \- details -
@@ -74,12 +62,6 @@
             = "Yea: #{@fractional_tally["Yea"]}"
           %li
             = "Nay: #{@fractional_tally["Nay"]}"
-          - if @fractional_tally["Not Voting"].to_f > 0
-            %li
-              = "No Vote: #{@fractional_tally["Not Voting"]}"
-          - if @fractional_tally["Present"].to_f > 0
-            %li
-              = "Present: #{@fractional_tally["Present"]}"
 
       %p.details
         \- details -
@@ -99,13 +81,7 @@
             = "Yea: #{@seniority_tally["Yea"]}"
           %li
             = "Nay: #{@seniority_tally["Nay"]}"
-          - if @seniority_tally["Not Voting"].to_f > 0 
-            %li
-              = "No Vote: #{@seniority_tally["Not Voting"]}"
-          - if @seniority_tally["Present"].to_f > 0    
-            %li
-              = "Present: #{@seniority_tally["Present"]}"
-      
+     
       %p.details
         \- details -
 
