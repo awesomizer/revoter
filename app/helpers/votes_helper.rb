@@ -18,6 +18,8 @@ module VotesHelper
       return 'Rejected'
     when /passed/i
       return 'Passed'
+    when /agreed/i
+      return 'Passed'
     else
       return 'Error'
     end
