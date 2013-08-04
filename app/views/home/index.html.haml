@@ -13,7 +13,7 @@
   %h2.center
     Find a Bill
 
-  = form_tag({:controller => :bills, :action => :find}, :method => :get) do
+  = form_tag( {:controller => :bills, :action => :find}, :method => :get ) do
     = radio_button_tag :bill_type, "s", {:checked => true}
     = label_tag "Senate Bill"
     &nbsp;
@@ -22,7 +22,7 @@
     <br />
 
     = label_tag "Congress"
-    = select_tag :congress, options_for_select(CONGRESSES, 113)
+    = select_tag :congress, options_for_select( CONGRESSES, 113 )
     <br />
 
     = label_tag "Number"
@@ -43,7 +43,7 @@
 
 :javascript
 
-  var bodyAjax = (function() {
+  var bodyAjax = ( function() {
 
       var ajaxLink = function( element ) {
               $link = $( element );
