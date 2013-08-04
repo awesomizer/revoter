@@ -70,12 +70,12 @@
     history.replaceState( {path: '/'}, '', '/' );
 
     var ajax = ( function() {
-      var billType = $( 'input:radio[name=bill_type]:checked' ).val();
-      var billNumberValue = $( '#bill_number' ).val();
-      var congress = $( '#congress' ).val();
       var billNumberElement = $( '#bill_number' );
 
       var formSubmit = function() {
+      var billNumberValue = $( '#bill_number' ).val();
+      var billType = $( 'input:radio[name=bill_type]:checked' ).val();
+      var congress = $( '#congress' ).val();
 
         $.get( '#{find_bill_url}', { bill_type: billType, bill_number: billNumberValue, congress: congress } )
         .success( function( result ) {
