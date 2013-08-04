@@ -79,7 +79,11 @@
 
         $.get( '#{find_bill_url}', { bill_type: billType, bill_number: billNumberValue, congress: congress } )
         .success( function( result ) {
-            bodyAjax.switchBody( result );
+          bodyAjax.switchBody( result );
+        })
+        .fail( function( result ) {
+          if (result.resultText =~ /NoMethodError at \/bill/)
+            alert( 'Sorry, we were unable to find a record with those parameters.' );
         });
       };
 
