@@ -125,7 +125,6 @@
       $( 'a' ).on( 'click', function( e ) {
         bodyAjax.ajaxLink( e.target );
         history.pushState({path: '#{bill_path(@vote.bill)}'}, '', '#{bill_path(@vote.bill)}');
-        console.log('pushState billpath');
         return false
       });
     })();  
