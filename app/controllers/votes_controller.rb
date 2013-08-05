@@ -25,7 +25,8 @@ class VotesController < ApplicationController
     else
       vote = Vote.get_votes([params[:roll_id]]) 
     end
-    redirect_to vote_path( {id: vote[0].id} ) 
+    @vote = vote[0]
+    redirect_to vote_path( {id: @vote.id} ) 
   end
 
 end
