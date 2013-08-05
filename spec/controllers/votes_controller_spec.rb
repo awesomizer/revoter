@@ -63,6 +63,20 @@ describe VotesController do
   end
 
   context 'GET #find' do
+    
+    it 'assigns the correct vote object to variable vote' do
+      vote = FactoryGirl.create(:vote)
+      get :find, {roll_id: 's168-2013'}
+      assigns(:vote).should eq(vote) 
+
+    end
+
+    it 'redirects to the show action' do
+      vote = FactoryGirl.create(:vote)
+      get :find, {roll_id: vote.roll_id}
+      response.should redirect_to action: :show, id: vote.id
+    end
+
   end
 
 end
