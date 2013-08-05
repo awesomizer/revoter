@@ -34,4 +34,7 @@ Votevote::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # Use webkit as the driver for Capybara
+  Capybara.javascript_driver = :webkit
 end
