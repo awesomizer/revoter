@@ -3,6 +3,9 @@ require 'spec_helper'
 describe Bill do
   it {should have_many(:votes)}
   it {should validate_presence_of(:sun_bill_id)}
+  it {should validate_uniqueness_of(:sun_bill_id)}
+  it {should validate_presence_of(:official_title)}
+  it {should validate_presence_of(:summary_short)}
 
   it 'should find existing bills given an array of roll_ids' do
     bill = FactoryGirl.create(:bill)
