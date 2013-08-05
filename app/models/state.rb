@@ -4,7 +4,7 @@ class State < ActiveRecord::Base
 
   has_many :legislators
 
-  validate :code, :presence => true, :uniqueness => true
-  validates_presence_of :name, :population
+  validates_uniqueness_of :code
+  validates_presence_of :code, :name, :population
 
 end
