@@ -5,12 +5,12 @@ class Bill < ActiveRecord::Base
   serialize :urls
   serialize :last_action
 
-  attr_accessible :sun_bill_id, :last_action, :last_vote_at, :nicknames, :official_title, :summary_short, :urls
+  attr_accessible :sun_bill_id, :last_action, :last_vote_at, :nicknames, :official_title, :summary_short, :vote_list, :urls
 
   has_many :votes
 
   validates_presence_of :sun_bill_id, :uniqueness => :true
-  validates_presence_of :official_title, :summary_short, :vote_list
+  validates_presence_of :official_title, :summary_short
 
   def self.get_bills sun_bill_id_array
     bill_list = []
