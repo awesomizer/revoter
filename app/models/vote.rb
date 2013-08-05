@@ -8,7 +8,7 @@ class Vote < ActiveRecord::Base
   belongs_to :bill
   has_and_belongs_to_many :legislators
 
-  validates :roll_id, :presence => true, :uniqueness => true
+  validates :roll_id, presence: true, uniqueness: true
   validates_presence_of :question, :required, :result, :breakdown, :voters
 
   def self.get_votes roll_id_array
