@@ -5,7 +5,7 @@ class Bill < ActiveRecord::Base
   serialize :urls
   serialize :last_action
 
-  attr_accessible :sun_bill_id, :last_action, :last_vote_at, :nicknames, :official_title, :summary_short, :vote_list, :urls
+  attr_accessible :sun_bill_id, :last_action, :last_vote_at, :nicknames, :official_title, :summary_short, :urls
 
   has_many :votes
 
