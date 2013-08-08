@@ -1,48 +1,24 @@
-Given(/^I am a site user$/) do
-  pending # express the regexp above with the code you wish you had
+
+When(/^I am on the page for searching bills$/) do
+  visit root_path 
 end
 
-When(/^I navigate to the vote page$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
+# This is failing because the homepage is refreshing instead of loading vote#show, thoug the link step passes and this works in app
 Then(/^I should see the traditional roll call$/) do
-  pending # express the regexp above with the code you wish you had
+  pending # page.should have_content( 'Traditional' )
 end
 
-When(/^I click the Popular button$/) do
-  pending # express the regexp above with the code you wish you had
+Then(/^I should see vote weights$/) do 
+  page.should have_content( 'weight' )
 end
 
-Then(/^I should see the popular roll call$/) do
-  pending # express the regexp above with the code you wish you had
+Then(/^I should see a list of recent Senate vote links$/) do 
+  vote_links = all 'li.recent-vote'  
+  vote_links.should_not be_empty
 end
 
-When(/^I click the (\d+)\+ Fractional button$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+When(/^I click a link for a vote$/) do
+  first( 'li.recent-vote' ).click
 end
 
-Then(/^I should see the (\d+)\+ Fractional roll call$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I click the (\d+)\+ Senority button$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I should see the (\d+)\+ Senority roll call$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-Given(/^A list of votes for a bill is displayed$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I click a vote for the bill$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^The vote's information should be displayed on the screen$/) do
-  pending # express the regexp above with the code you wish you had
-end
 
