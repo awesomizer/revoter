@@ -3,7 +3,7 @@ Given(/^a valid bill number and congress number entered in the form$/) do
 end
 
 When(/^I click the form submit button$/) do
-  pending # express the regexp above with the code you wish you had
+  click_button 'Get it!'
 end
 
 Then(/^The bill's information should be displayed on the screen$/) do
