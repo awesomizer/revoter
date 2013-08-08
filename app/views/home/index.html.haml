@@ -38,7 +38,7 @@
 
   %ul
     - @recent_votes.each do |v|
-      %li
+      %li.recent-vote
         = link_to v["question"], find_vote_path( {roll_id: v["roll_id"]} )
 
 :javascript
