@@ -6,7 +6,7 @@ Feature: Obtain Senate legislation
 	Scenario: get bill information with valid inputs
 		Given a valid bill number and congress number entered in the form
 		When I click the form submit button
-		Then The bill's information should be displayed on the screen
+		Then The bill's title should be displayed on the screen
 
 	Scenario: generate an error when you submit invalid inputs
 		Given an invalid bill number and congress number combination entered in the form

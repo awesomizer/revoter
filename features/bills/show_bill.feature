@@ -5,5 +5,6 @@ Feature: Show Bill Information
 
 	Scenario: Bill info
 		Given I am a site user
-		When I navigate to the bill view page
-		Then I should see basic information re the bill
+		When I navigate to the bill view page for a specific bill
+		Then I should see title of the bill
+		And I should see a description of the bill
