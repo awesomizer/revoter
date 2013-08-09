@@ -32,7 +32,7 @@ class Legislator < ActiveRecord::Base
         l.nickname = voter["nickname"]
         l.last_name = voter["last_name"]
         l.party = voter["party"]
-        if voter["state"]
+        if voter["state"] # attribute gets renamed in object to state_code from state in api response
           l.state_id = State.find_by_code(voter["state"]).id
         else
           l.state_id = State.find_by_code(voter["state_code"]).id
