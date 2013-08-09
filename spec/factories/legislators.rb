@@ -1,4 +1,5 @@
 FactoryGirl.define do
+
   factory :legislator do
     id 1
     bioguide_id 'A000'
@@ -11,7 +12,9 @@ FactoryGirl.define do
     last_name 'Ator'
     party 'D'
     updated_at '2013-07-23 00:41:06.150001'
-    state
+    #state
   end
+    
 end
+
 
