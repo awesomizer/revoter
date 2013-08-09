@@ -14,9 +14,10 @@ class Vote < ActiveRecord::Base
   def self.get_votes roll_id_array
     votes = []
     roll_id_array.each do |id|
-      vote = self.find_or_initialize_by_roll_id( id["roll_id"] )
+      vote = self.find_or_initialize_by_roll_id( id )
+#debugger      
       if vote.new_record?
-        vote = self.create_vote( vote, id["roll_id"] ) # refactor this method to pass a list of votes to create votes and only hit the api once
+        vote = self.create_vote( vote, id ) # refactor this method to pass a list of votes to create votes and only hit the api once
       end
       votes << vote
     end
@@ -68,10 +69,11 @@ class Vote < ActiveRecord::Base
 
 private
 
-  def self.create_vote vote, roll_id
+  def self.create_vote vote, roll_id # roll_id is nil
     api = CongressApi.new
     results = api.get_vote(roll_id)
     results = results["results"][0]
+#debugger    
     vote.roll_id = results["roll_id"]
     vote.question = results["question"] 
     vote.required = results["required"] 
