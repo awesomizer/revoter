@@ -79,7 +79,7 @@ private
     vote.vote_type = results["vote_type"]
     vote.breakdown = results["breakdown"]
     vote.voters = results["voters"]
-    bill = Bill.get_bills( results["bill"]["bill_id"] )
+    bill = Bill.get_bills( [ results["bill"]["bill_id"] ] )
     vote.bill_id = bill[0].id
     vote.save
     return vote
