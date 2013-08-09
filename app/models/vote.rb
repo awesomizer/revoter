@@ -14,9 +14,9 @@ class Vote < ActiveRecord::Base
   def self.get_votes roll_id_array
     votes = []
     roll_id_array.each do |id|
-      vote = self.find_or_initialize_by_roll_id(id)
+      vote = self.find_or_initialize_by_roll_id( id["roll_id"] )
       if vote.new_record?
-        vote = self.create_vote(vote, id) # refactor this method to pass a list of votes to create votes and only hit the api once
+        vote = self.create_vote( vote, id["roll_id"] ) # refactor this method to pass a list of votes to create votes and only hit the api once
       end
       votes << vote
     end
