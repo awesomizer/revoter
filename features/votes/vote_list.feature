@@ -3,7 +3,7 @@ Feature: Links to recent Senate votes
 	As a politically active person
 	I want a list of recent votes taken by the Senate
 
-	Scenario: get vote recent votes list
+	Scenario: get recent votes list
 		When I am on the page for searching bills
 		Then I should see a list of recent Senate vote links
 
