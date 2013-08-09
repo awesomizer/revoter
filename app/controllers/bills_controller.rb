@@ -4,7 +4,11 @@ class BillsController < ApplicationController
     sun_bill_id = [params[:bill_type] + params[:bill_number] + "-" + params[:congress]]
     bill = Bill.get_bills(sun_bill_id)
     @bill = bill[0]
-    @votes = Vote.get_votes(@bill.vote_list)
+    vote_array =[]
+    @bill.vote_list.each do |vote|
+      vote_array << vote["roll_id"]
+    end
+    @votes = Vote.get_votes(vote_array)
     render :show
   end
 
