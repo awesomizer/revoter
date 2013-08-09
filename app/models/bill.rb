@@ -21,6 +21,9 @@ class Bill < ActiveRecord::Base
 
   def self.get_bills sun_bill_id_array
     bill_list = []
+    unless sun_bill_id_array.is_a?( Array )
+      sun_bill_id_array.to_a
+    end
     sun_bill_id_array.each do | id |
       bill = self.find_or_initialize_by_sun_bill_id( id )
       if bill.new_record?
