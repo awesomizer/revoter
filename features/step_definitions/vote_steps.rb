@@ -3,7 +3,7 @@ When(/^I am on the page for searching bills$/) do
   visit root_path 
 end
 
-# This is failing because the homepage is refreshing instead of loading vote#show, thoug the link step passes and this works in app
+# This is failing because the homepage is refreshing instead of loading vote#show, though the link step passes and this works in app
 Then(/^I should see the traditional roll call$/) do
   pending # page.should have_content( 'Traditional' )
 end
