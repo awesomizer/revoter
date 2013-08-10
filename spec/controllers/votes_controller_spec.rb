@@ -1,5 +1,9 @@
 require 'spec_helper'
 
+# this forces db:seed to run, 
+# but db isn't seeded afterward.  It worked for a minute and these all passed ... frustrating.
+require Rails.root.join('db','seeds')
+
 describe VotesController do
   before(:each) do
       @vote = FactoryGirl.create( :vote )
