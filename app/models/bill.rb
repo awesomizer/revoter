@@ -32,7 +32,8 @@ class Bill < ActiveRecord::Base
   end
 
   def self.create_bill bill, sun_bill_id
-    results = CongressApi.get_bill( sun_bill_id )
+    api = CongressApi.new
+    results = api.get_bill( sun_bill_id )
     results = results[ "results" ][0]
     bill.official_title = results[ "official_title" ] 
     bill.nicknames = results[ "nickname" ] 
