@@ -7,6 +7,7 @@ Given(/^I am on the bill search page$/) do
 end
 
 Given(/^There is a bill in the database$/) do
+  if @bill then @bill.delete end
   @bill = FactoryGirl.create( :bill )
 end
 
