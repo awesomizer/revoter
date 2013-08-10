@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130722033838) do
+ActiveRecord::Schema.define(:version => 20130810035115) do
 
   create_table "bills", :force => true do |t|
     t.text     "official_title"
@@ -45,6 +45,8 @@ ActiveRecord::Schema.define(:version => 20130722033838) do
     t.integer  "state_id"
   end
 
+  add_index "legislators", ["bioguide_id"], :name => "index_legislators_on_bioguide_id", :unique => true
+
   create_table "legislators_votes", :id => false, :force => true do |t|
     t.integer "legislator_id"
     t.integer "vote_id"
@@ -72,6 +74,8 @@ ActiveRecord::Schema.define(:version => 20130722033838) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
+
+  add_index "states", ["code"], :name => "index_states_on_code", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -111,5 +115,7 @@ ActiveRecord::Schema.define(:version => 20130722033838) do
     t.text     "breakdown"
     t.text     "voters"
   end
+
+  add_index "votes", ["roll_id"], :name => "index_votes_on_roll_id", :unique => true
 
 end
