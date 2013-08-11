@@ -1,8 +1,16 @@
+// Bootstrap variable overrides
 $gridGutterWidth: 0px;
+$bodyBackground: rgb(113, 139, 152);
+$navbarBackground: rgb(113, 139, 152);
+$navbarBrandColor: rgb(136, 16, 12);
+$textColor: rgb(30, 68, 87);
+$linkColor: rgb(16, 36, 46);
+
+// File imports
 @import "bootstrap";
-@import "mixins";
-@import "votes";
+@import "master";
 @include border-box;
 //@import "bootstrap-responsive";
 
+// Site-wide override css
 body { padding-top: 60px; }
