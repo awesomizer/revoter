@@ -43,9 +43,24 @@ li {
   line-height: 1.5em;
 }
 
-*.center {
+.center {
   text-align: center;
 }
+
+// Buttons
+
+.btn {
+  color: $textColor;
+  background-color: rgb(246, 159, 156);
+  background-image: none;
+  font-size: 1.5em;
+}
+
+.btn:hover, .btn:focus {
+  color: $contentBackground;
+  background-color: rgb(58, 86, 100);
+}
+
 
 // Clearfix
 
