@@ -1,12 +1,12 @@
 %div.roll-call
   - roll ||= ''
   
-  %h2
+  %h2.heading
     Roll Call
 
   %div.row-fluid
     %div.span6
-      %h3
+      %h2
         Democrats
 
       - @vote_types.each do |type|
@@ -26,7 +26,7 @@
                   = weight
 
     %div{:class => ['span6', 'right-column']}
-      %h3
+      %h2
         Republicans
 
       - @vote_types.each do |type|
@@ -46,7 +46,7 @@
                   = weight
       <br />
 
-      %h3
+      %h2
         Independents
 
       - @vote_types.each do |type|

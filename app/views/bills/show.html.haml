@@ -1,11 +1,11 @@
 .bill
-  %h2
+  %h1
     = @bill.official_title
 
   %p
     = @bill.summary_short
 
-  %h3
+  %h1
     - if !@votes.blank?
       Votes
     - else

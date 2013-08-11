@@ -1,8 +1,8 @@
 .vote
-  %h2 
+  %h1 
     = @vote.question
 
-  %h3
+  %p.sub-head
     = link_to @vote.bill.official_title, bill_path(@vote.bill), remote: true
 
   %h5.bill-info-footer.left
@@ -10,6 +10,8 @@
   
   %h5.bill-info-footer.right
     = "Result: #{@vote.result}"
+  <br />
+  <br />
 
   %div.row-fluid
     %div.span3
