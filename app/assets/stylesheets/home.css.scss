@@ -41,14 +41,14 @@ input#bill_type_sres {
 }
 
 ::-webkit-input-placeholder {
-   color: red;
+   color: $textColor;
 }
 :-moz-placeholder { /* Firefox 18- */
-   color: red;  
+   color: $textColor;  
 }
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: red;  
+   color: $textColor;  
 }
 :-ms-input-placeholder {  
-   color: red;  
+   color: $textColor;  
 }
