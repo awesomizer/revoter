@@ -1,21 +1,50 @@
-p {
-  text-align: justify;
+@import "master";
+
+// Background
+
+.content {
+  background-color: $contentBackground;
 }
 
-a {
-  color: rgb(25, 25, 25);
+// Typography
+
+p {
+  text-align: justify;
+  font-style: italic;
+}
+
+h1 {
+  font-size: 1.75em;
+  line-height: 1.5em;
+}
+
+h1, h2 {
+  color: $heads12;
+}
+
+h3, h4, h5, h6 {
+  color: $heads3456;
 }
 
 h2 {
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
 h3 {
-  font-size: 1.5em;
+  font-size: 1.25em;
 }
 
 h5.indent {
   margin-left: 1em;
+}
+
+li {
+  font-size: 1.25em;
+  line-height: 1.5em;
+}
+
+*.center {
+  text-align: center;
 }
 
 // Clearfix

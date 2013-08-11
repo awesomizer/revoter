@@ -1,4 +1,13 @@
+@import "master";
+
 // Vote description
+
+p.sub-head {
+  font-size: 1.25em;
+  font-style: italic;
+  font-weight: bold;
+  line-height: 1.25em;
+}
 
 h5.bill-info-footer {
   display: inline-block;
@@ -41,12 +50,16 @@ div.vote-box-first {
 }
 
 div.vote-box:hover {
-  background-color: #333333;
-  color: #EEEEEE;
+  background-color: $textColor;
+  color: rgb(238, 247, 251);
+}
+
+div.vote-box:hover > h4 {
+  color: rgb(218, 238, 247);
 }
 
 ul.vote-box, h4 {
-  text-align: center
+  text-align: center;
 }
 
 // Details
@@ -62,8 +75,8 @@ p.drop {
   padding: 1em;
   margin: 0 0 0 -35%;
   width: 150%;
-  background-color: #333333;
-  color: white;
+  background-color: $textColor;
+  color: rgb(238, 247, 251);
   opacity: 0;
   z-index: 10;
   -webkit-transition: opacity .1s, left 0s, step-end .1s;
@@ -89,14 +102,17 @@ div.roll-call {
   position: relative;
   top: -7em;
     h2 {
-      margin-left: 41%;
-      margin-right: auto;
-      width: 9em;
+      text-align: center;
     }
 }
 
-.vote .roll-call h3 {
-  text-align: center;
+.vote h2.heading {
+  font-size: 1.75em;
+  display: inline-block;
+  text-align: left;
+  width: 100%;
+  border-bottom: 1px solid;
+  border-color: $textColor;
 }
 
 h4.type {

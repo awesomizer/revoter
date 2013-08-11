@@ -1,5 +1,15 @@
+@import "master";
 
-.home h3, .home h4, h2.center{
+.home h1 {
+  font-size: 3em;
+}
+
+.home h2 {
+  font-size: 2em;
+  line-height: 1.5em;
+}
+
+.home h3, .home h4 {
   text-align: center;
 }
 
