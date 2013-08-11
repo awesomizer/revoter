@@ -15,7 +15,7 @@ p {
 
 h1 {
   font-size: 1.75em;
-  line-height: 1.5em;
+  line-height: 1.4em;
 }
 
 h1, h2 {
@@ -63,11 +63,11 @@ li {
 
 // Forms
 
-select, textarea, input[type="text"], input[type="password"], 
+select, textarea, input[type="text"], input[type="password"],
 input[type="datetime"], input[type="datetime-local"], input[type="date"], 
-input[type="month"], input[type="time"], input[type="week"], 
-input[type="number"], input[type="email"], input[type="url"], 
-input[type="search"], input[type="tel"], input[type="color"], 
+input[type="month"], input[type="time"], input[type="week"],
+input[type="number"], input[type="email"], input[type="url"],
+input[type="search"], input[type="tel"], input[type="color"],
 .uneditable-input {
     background-color:$contentBackground;
     border: 1px solid $textColor;
