@@ -32,6 +32,8 @@ class Vote < ActiveRecord::Base
     [ "Yea", "Nay", "Present", "Not Voting" ] 
   end
 
+  # refactor these vote calculators out as strategies
+
   def self.fractional_vote voters, system, required
     votes = {}
     tally = { "Result" => "", "Yea" => 0.0, "Nay" => 0.0, "Present" => 0.0, "Not Voting" => 0.0 }
